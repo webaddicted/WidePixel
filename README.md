@@ -8,5 +8,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e6913bfbf05147418fcf0221022b76e2)](https://www.codacy.com/app/webaddicted/WidePixel)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/e6913bfbf05147418fcf0221022b76e2)](https://www.codacy.com/app/webaddicted/WidePixel)
 
+<img src="https://github.com/webaddicted/WidePixel/raw/main/screenshot/getstart.gif" width="205"> 
+
 
 
