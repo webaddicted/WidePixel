@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/AssetsConst.dart';
+import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
+import 'package:wallpaper/view/widgethelper/SlideDots.dart';
 
 class OnboardingPage extends StatefulWidget {
   @override
@@ -54,41 +56,32 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 itemBuilder: (ctx, i) => pageWidget(i),
               ),
             ),
-            // Column(
-            //   children: <Widget>[
-            //     Align(
-            //       alignment: Alignment.topLeft,
-            //       child: Padding(
-            //         padding: EdgeInsets.only(
-            //             left: 25.0,
-            //             top: Get.width * 0.12),
-            //         child: getTxtBlackColor(
-            //           msg: inFinalPage() ? "" : 'SKIP',
-            //           fontWeight: FontWeight.w700,
-            //           fontSize: 13.0,
-            //         ),
-            //       ),
-            //     ),
-            //     Container(
-            //       alignment: AlignmentDirectional.center,
-            //       margin: EdgeInsets.only(
-            //           bottom: 0.0,
-            //           top: MediaQuery.of(context).size.height * 0.28),
-            //       child: inFinalPage()
-            //           ? GetStartedButton()
-            //           : Row(
-            //               mainAxisAlignment: MainAxisAlignment.center,
-            //               children: <Widget>[
-            //                 for (int i = 0; i < sliderArrayList.length; i++)
-            //                   if (i == _currentPage)
-            //                     SlideDots(true)
-            //                   else
-            //                     SlideDots(false)
-            //               ],
-            //             ),
-            //     ),
-            //   ],
-            // )
+            Container(
+                alignment: AlignmentDirectional.bottomCenter,
+                margin: EdgeInsets.only(bottom: 10, top: 50),
+                child: inFinalPage()
+                    ? getStartBtn()
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          for (int i = 0; i < sliderArrayList.length; i++)
+                            if (i == _currentPage)
+                              SlideDots(true)
+                            else
+                              SlideDots(false)
+                        ],
+                      )),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 25.0, top: Get.width * 0.12),
+                child: getTxtBlackColor(
+                  msg: inFinalPage() ? "" : 'SKIP',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13.0,
+                ),
+              ),
+            ),
           ],
         ),
       );
@@ -145,7 +138,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           borderRadius: new BorderRadius.circular(27.0),
         ),
         onPressed: () {
-          //? do something
+          Get.offAllNamed(RoutersConst.interest_page);
         },
         color: Color(0xff01dc9d),
         child: Center(

@@ -97,7 +97,7 @@ Text getTxtColor(
     required Color txtColor,
     double fontSize = 15,
     FontWeight fontWeight = FontWeight.normal,
-    int maxLines = 1,
+    int? maxLines,
     TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
