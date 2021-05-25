@@ -5,14 +5,13 @@ import 'package:wallpaper/utils/common/GlobalUtilities.dart';
 class ColorConst {
   // "63FF90"
   // 3e2f64
-  static const Color COLOR = Colors.purple;//Colors.green;
+  static const Color COLOR = Colors.purple; //Colors.green;
 
-
-  static Color APP_COLOR = colorFromHex('#3e2f82');//Colors.green;
+  static Color APP_COLOR = Color(0xff01dc9d); //Colors.green;
   // static Color APP_COLOR = colorFromHex('#32CD32');//Colors.green;
   // static Color APP_COLOR = colorFromHex('#00FA9A');//Colors.green;
-
-  static Color APP_YELLOW  = colorFromHex('#f79633');
+  static Color LIGHT_GREEN_COLOR = Color(0xff01dc9d);
+  static Color APP_YELLOW = colorFromHex('#f79633');
   static const Color GREY_COLOR = Colors.grey;
   static const Color RED_COLOR = Colors.red;
   static const Color GREEN_COLOR = Colors.green;

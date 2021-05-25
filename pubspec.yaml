@@ -33,4 +33,3 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/local_file/

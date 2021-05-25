@@ -16,7 +16,7 @@ import 'package:wallpaper/utils/sp/sp_manager.dart';
 Text getTxt(
     {required String msg,
     FontWeight fontWeight = FontWeight.normal,
-    int maxLines = 1,
+    int? maxLines,
     TextAlign textAlign = TextAlign.start}) {
   return Text(msg,
       maxLines: maxLines,
@@ -28,7 +28,7 @@ Text getTxtAppColor(
     {required String msg,
     double fontSize = 15,
     FontWeight fontWeight = FontWeight.normal,
-    int maxLines = 1,
+    int? maxLines,
     TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
@@ -45,7 +45,7 @@ Text getTxtWhiteColor(
     {required String msg,
     double fontSize = 15,
     FontWeight fontWeight = FontWeight.normal,
-    int maxLines = 1,
+    int? maxLines,
     TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
@@ -62,7 +62,7 @@ Text getTxtBlackColor(
     {required String msg,
     double fontSize = 15,
     FontWeight fontWeight = FontWeight.normal,
-    int maxLines = 1,
+    int? maxLines,
     TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
@@ -79,7 +79,7 @@ Text getTxtGreyColor(
     {required String msg,
     double fontSize = 15,
     FontWeight fontWeight = FontWeight.normal,
-    int maxLines = 1,
+    int? maxLines,
     TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
@@ -362,9 +362,9 @@ Widget raisedRoundColorBtn(String txt, Color color, Function btnClick()) =>
 
 AppBar getAppBar({required String title, double fontSize = 15}) {
   return AppBar(
-    centerTitle: true,
-    title: getTxtBlackColor(msg: title, fontWeight: FontWeight.bold, fontSize: fontSize)
-  );
+      centerTitle: true,
+      title: getTxtBlackColor(
+          msg: title, fontWeight: FontWeight.bold, fontSize: fontSize));
 }
 
 AppBar getAppBarWithBackBtn(
@@ -447,7 +447,7 @@ showCustomDialog() => showDialog(
           ));
     });
 
-Widget showError(String? error ) {
+Widget showError(String? error) {
   return Visibility(
       visible: (error != null && error.length > 0) ? false : true,
       child: getTxtColor(msg: error ?? '', txtColor: ColorConst.RED_COLOR));
@@ -570,14 +570,14 @@ Widget getCacheImage(
   );
   if (assetPath.length > 0) {
     imgWidget = Container(
-      width:  width,
+      width: width,
       height: height,
       decoration: isShowBorderRadius ? border : BoxDecoration(),
       child: Image.asset(assetPath, fit: fit),
     );
   } else if (filePath != null && filePath.path.length > 0) {
     imgWidget = Container(
-      width:  width,
+      width: width,
       height: height,
       decoration: isShowBorderRadius ? border : BoxDecoration(),
       child: ClipOval(child: Image.file(filePath, fit: fit)),

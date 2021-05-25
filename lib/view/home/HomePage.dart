@@ -11,6 +11,7 @@ class HomePage extends GetView<HomeController>{
       backgroundColor: ColorConst.WHITE_COLOR,
       body: Center(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

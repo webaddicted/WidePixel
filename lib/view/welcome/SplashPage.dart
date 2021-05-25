@@ -40,6 +40,7 @@ class _SplashPageState extends State<SplashPage>
       backgroundColor: ColorConst.WHITE_COLOR,
       body: Center(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

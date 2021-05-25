@@ -2,7 +2,7 @@ class StrConst {
   static const String APP_NAME = 'Wide Pixel';
   static bool DEBUG = false;
 //  {START TITLE}
-  static var DUMMY_TXT = 'Something went wrong please try again later. Something went wrong please try again later. Something went wrong please try again later. Something went wrong please try again later. Something went wrong please try again later.';
+  static var DUMMY_TXT = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmood tempor inciddidunt ut labore et dolore magna sed do sed do aliqua.';
   static String NO_DATA_FOUND = 'No Data Found';
   static var SOMETHING_WENT_WRONG = 'Something went wrong please try again later.';
   static var INVITE_TITLE = APP_NAME+"\nRefer and Earn";
@@ -11,5 +11,7 @@ class StrConst {
   static var yes = 'Yes';
   static var no = 'No';
   static var warning = 'Warning!';
+
+  static var choose_topic = 'Choose Topics';
 
 }

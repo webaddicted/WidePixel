@@ -5,19 +5,28 @@ import 'package:wallpaper/data/controller/WelcomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/AssetsConst.dart';
+import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
+import 'package:wallpaper/utils/constant/StrConst.dart';
 
 class InterestedPage extends GetView<WelcomeController> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: _createUi());
   }
 
   Widget _createUi() {
-    return Container(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(
-          child: GridView.builder(
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Container(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          SizedBox(height: 80),
+          getTxtColor(
+              msg: StrConst.choose_topic,
+              fontSize: 18,
+              txtColor: ColorConst.LIGHT_GREEN_COLOR),
+          GridView.builder(
             shrinkWrap: true,
             physics: ClampingScrollPhysics(),
             itemCount: interestList.length,
@@ -27,36 +36,83 @@ class InterestedPage extends GetView<WelcomeController> {
             ),
             itemBuilder: (context, index) {
               InterestedPageList categ = interestList[index];
-              return InkWell(
-                onTap: () {
-                  Get.offAllNamed(RoutersConst.home);
-                },
-                child: Card(
-                  elevation: 3,
-                  // color: categ.bgColor,
-                  child: Center(
-                    child: Stack(
+              return Container(
+                margin: EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Stack(
                       children: <Widget>[
-                        getCacheImage(url: categ.imgUrl),
+                  getCacheImage(url: categ.imgUrl),
                         Lottie.asset(
                           AssetsConst.CHECK_DONE_IMG,
                           repeat: false,
                           reverse: false,
                           animate: true,
                         ),
-                        getTxtBlackColor(
-                            msg: categ.heading,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600)
-                      ],
-                    ),
+                        Positioned(
+                    bottom: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromARGB(200, 0, 0, 0),
+                            Color.fromARGB(0, 0, 0, 0)
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 20.0),
+                      alignment: Alignment.center,
+                      child: getTxtWhiteColor(
+                          msg: categ.heading,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
                   ),
                 ),
+                ],
+              )),
+              );
+              return InkWell(
+              onTap: ()=> Get.toNamed(RoutersConst.home),
+              child: Card(
+              elevation: 3,
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              ),
+              // color: categ.bgColor,
+              child: Center(
+              child: Stack(
+              children: <Widget>[
+              getCacheImage(url: categ.imgUrl),
+              Lottie.asset(
+              AssetsConst.CHECK_DONE_IMG,
+              repeat: false,
+              reverse: false,
+              animate: true,
+              ),
+              Container(
+              alignment: Alignment.bottomCenter,
+              padding: EdgeInsets.only(bottom: 5),
+              child: getTxtWhiteColor(
+              msg: categ.heading,
+              fontSize: 14,
+              fontWeight: FontWeight.w600),
+              )
+              ],
+              ),
+              ),
+              )
+              ,
               );
             },
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 

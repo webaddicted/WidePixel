@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/AssetsConst.dart';
+import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
 import 'package:wallpaper/view/widgethelper/SlideDots.dart';
@@ -57,36 +58,56 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             ),
             Container(
-                alignment: AlignmentDirectional.bottomCenter,
-                margin: EdgeInsets.only(bottom: 10, top: 50),
-                child: inFinalPage()
-                    ? getStartBtn()
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          for (int i = 0; i < sliderArrayList.length; i++)
-                            if (i == _currentPage)
-                              SlideDots(true)
-                            else
-                              SlideDots(false)
-                        ],
-                      )),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 25.0, top: Get.width * 0.12),
-                child: getTxtBlackColor(
-                  msg: inFinalPage() ? "" : 'SKIP',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 13.0,
-                ),
+              padding: EdgeInsets.only(left:10, right: 20, bottom: 15),
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if(!inFinalPage())
+                  InkWell(
+                    onTap: ()=>Get.offAllNamed(RoutersConst.interest_page),
+                    child: getTxtBlackColor(
+                      msg:'SKIP',
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15.0,
+                    ),
+                  ),
+                  Container(
+                      child: inFinalPage()
+                          ? getStartBtn()
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                for (int i = 0; i < sliderArrayList.length; i++)
+                                  if (i == _currentPage)
+                                    SlideDots(true)
+                                  else
+                                    SlideDots(false)
+                              ],
+                            )),
+                  if(!inFinalPage())
+                  FloatingActionButton(
+                    backgroundColor: ColorConst.WHITE_COLOR,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: ColorConst.APP_COLOR,
+                    ),
+                    onPressed: () {
+                      _pageController.nextPage(
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    },
+                  ),
+                ],
               ),
-            ),
+            )
           ],
         ),
       );
 
   Widget pageWidget(int index) {
+    Slider slider = sliderArrayList[index];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -96,7 +117,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             width: Get.width,
             height: Get.height * 0.556,
             child: SvgPicture.asset(
-              sliderArrayList[index].sliderImageUrl,
+              slider.sliderImageUrl,
               width: Get.width,
             ),
             //   decoration: BoxDecoration(
@@ -108,19 +129,18 @@ class _OnboardingPageState extends State<OnboardingPage> {
         ),
         SizedBox(height: 20),
         getTxtColor(
-          msg: sliderArrayList[index].sliderHeading,
+          msg: slider.sliderHeading,
           fontWeight: FontWeight.w600,
-          txtColor: Color(0xff01dc9d),
-          fontSize: 18.0,
+          txtColor: ColorConst.APP_COLOR,
+          fontSize: 19.0,
         ),
         SizedBox(height: 10),
         Center(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.0),
             child: getTxtBlackColor(
-              msg: sliderArrayList[index].sliderSubHeading,
-              fontWeight: FontWeight.w600,
-              fontSize: 12.0,
+              msg: slider.sliderSubHeading,
+              fontSize: 15.0,
               textAlign: TextAlign.center,
             ),
           ),
@@ -130,26 +150,26 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   Widget getStartBtn() {
-    return Container(
-      height: 45.0,
-      width: 140.0,
-      child: FlatButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(27.0),
-        ),
-        onPressed: () {
-          Get.offAllNamed(RoutersConst.interest_page);
-        },
-        color: Color(0xff01dc9d),
-        child: Center(
-            child: Padding(
-          padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
-          child: getTxtWhiteColor(
-            msg: "GET STARTED",
-            fontWeight: FontWeight.w700,
-            fontSize: 13.0,
+    return Expanded(
+      child: Container(
+        height: 45.0,
+        width: 140.0,
+        child: FlatButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(27.0),
           ),
-        )),
+          onPressed: () =>Get.offAllNamed(RoutersConst.interest_page),
+          color: ColorConst.LIGHT_GREEN_COLOR,
+          child: Center(
+              child: Padding(
+            padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
+            child: getTxtWhiteColor(
+              msg: "GET STARTED",
+              fontWeight: FontWeight.w700,
+              fontSize: 13.0,
+            ),
+          )),
+        ),
       ),
     );
   }
@@ -170,13 +190,13 @@ class Slider {
 
 final sliderArrayList = [
   Slider(
-      sliderImageUrl: AssetsConst.SLIDER1,
-      sliderHeading: 'Watch Wallpaper',
+      sliderImageUrl: AssetsConst.SLIDER2,
+      sliderHeading: 'Share Wallpaper',
       sliderSubHeading: StrConst.DUMMY_TXT,
       skipBtn: 'SKIP'),
   Slider(
-      sliderImageUrl: AssetsConst.SLIDER2,
-      sliderHeading: 'Share Wallpaper',
+      sliderImageUrl: AssetsConst.SLIDER1,
+      sliderHeading: 'Watch Wallpaper',
       sliderSubHeading: StrConst.DUMMY_TXT,
       skipBtn: 'SKIP'),
   Slider(
