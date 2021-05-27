@@ -3,18 +3,20 @@ import 'package:get/get.dart';
 import 'package:wallpaper/data/bean/CategoryBean.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
+import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DimenSize.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
-import 'package:wallpaper/view/home/CategoryItem.dart';
+import 'package:wallpaper/view/home/CircleCategoryItem.dart';
+import 'package:wallpaper/view/home/HomeCategoryItem.dart';
 
 class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorConst.WHITE_COLOR,
-        body: SafeArea(child: createUi()));
+        body: createUi());
   }
 
   Widget createUi() {
@@ -23,7 +25,19 @@ class HomePage extends GetView<HomeController> {
         toobar(),
         SliverList(
             delegate: SliverChildListDelegate(
-          [categoryTag(), categoryWithImg(), CategoryItem()],
+          [
+            categoryTag(),
+            SizedBox(height: 10),
+            categoryWithImg(),
+            SizedBox(height: 10),
+            HomeCategoryItem(ApiConstant.Rect_220_155),
+            SizedBox(height: 10),
+            CircleCategoryItem(ApiConstant.Circle_100),
+            SizedBox(height: 10),
+            HomeCategoryItem(ApiConstant.Rect_100_15),
+            SizedBox(height: 10),
+            CircleCategoryItem(ApiConstant.Circle_Color_50),
+          ],
         ))
       ],
     );
