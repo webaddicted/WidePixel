@@ -4,7 +4,6 @@ import 'package:wallpaper/utils/common/GlobalUtilities.dart';
 import 'package:wallpaper/utils/constant/AssetsConst.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
-import 'package:wallpaper/utils/sp/sp_manager.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -13,8 +12,6 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
-  var _visible = false;
-
   late AnimationController animationController;
   late Animation<double> animation;
 
@@ -30,7 +27,8 @@ class _SplashPageState extends State<SplashPage>
     animationController.forward();
     // var userInfo = await SPManager.getCustomerId();
     delay(durationSec: 5, click: () {
-      Get.offAllNamed(RoutersConst.onboard_page);
+      // Get.offAllNamed(RoutersConst.onboard_page);
+      Get.offAllNamed(RoutersConst.home);
     });
   }
 
