@@ -14,4 +14,8 @@ class StrConst {
 
   static var choose_topic = 'Choose Topics';
 
+  static var choose_topic_desc = 'you can choose topics and we gave suggest suitable products for you';
+
+  static var skip = 'Skip';
+
 }

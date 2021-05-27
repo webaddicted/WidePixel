@@ -5,4 +5,6 @@ class RoutersConst {
   static const interest_page = '/interest';
   static const home = '/home';
 
+  static String get_start = '/getstart';
+
 }
