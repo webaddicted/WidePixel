@@ -687,3 +687,21 @@ Widget showLoader({bool isShowDialog = false}) {
 //     width: 250,
 //   ));
 // }
+
+Widget getList({
+  required double height,
+  required int itemCount,
+  Axis scrollDirection = Axis.vertical,
+  required Function widget,
+}) {
+  return SizedBox(
+    height: height,
+    child: ListView.builder(
+      physics: BouncingScrollPhysics(),
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      itemCount: itemCount,
+      itemBuilder: (context, index) => widget(context, index),
+    ),
+  );
+}
