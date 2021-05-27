@@ -23,4 +23,6 @@ class ColorConst {
   static Color GREY_SHADE = Colors.grey.shade400;
   static const Color grey = Color(0xFF3A5160);
   static const Color nearlyBlack = Color(0xFF213333);
+
+  static var SPLASH_COLOR = Color(0xff01dc9d);
 }
