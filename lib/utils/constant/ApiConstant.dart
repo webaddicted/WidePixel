@@ -12,4 +12,12 @@ class ApiConstant {
   static var ABOUT_US = 'api/cancel-booking';
 
   static var ACCESS_TOKEN = '';
+
+  static var Rect_220_155 = 'Rect_220_155';
+  static var Rect_100_15 = 'Rect_100_15';
+
+  static String Circle_100 = 'Circle 100';
+  static String Circle_Color_50 = 'Circle color 50';
+
+
 }
