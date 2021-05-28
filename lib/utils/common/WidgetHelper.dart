@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/utils/common/ValidationHelper.dart';
 import 'package:wallpaper/utils/constant/AssetsConst.dart';
@@ -13,21 +14,23 @@ import 'package:wallpaper/utils/constant/StrConst.dart';
 import 'package:wallpaper/utils/sp/sp_manager.dart';
 
 //  {START TEXT VIEW}
-Text getTxt({required String msg,
-  FontWeight fontWeight = FontWeight.normal,
-  int? maxLines,
-  TextAlign textAlign = TextAlign.start}) {
+Text getTxt(
+    {required String msg,
+    FontWeight fontWeight = FontWeight.normal,
+    int? maxLines,
+    TextAlign textAlign = TextAlign.start}) {
   return Text(msg,
       maxLines: maxLines,
       textAlign: textAlign,
       style: TextStyle(fontWeight: fontWeight));
 }
 
-Text getTxtAppColor({required String msg,
-  double fontSize = 15,
-  FontWeight fontWeight = FontWeight.normal,
-  int? maxLines,
-  TextAlign textAlign = TextAlign.start}) {
+Text getTxtAppColor(
+    {required String msg,
+    double fontSize = 15,
+    FontWeight fontWeight = FontWeight.normal,
+    int? maxLines,
+    TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
     maxLines: maxLines,
@@ -39,11 +42,12 @@ Text getTxtAppColor({required String msg,
   );
 }
 
-Text getTxtWhiteColor({required String msg,
-  double fontSize = 15,
-  FontWeight fontWeight = FontWeight.normal,
-  int? maxLines,
-  TextAlign textAlign = TextAlign.start}) {
+Text getTxtWhiteColor(
+    {required String msg,
+    double fontSize = 15,
+    FontWeight fontWeight = FontWeight.normal,
+    int? maxLines,
+    TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
     maxLines: maxLines,
@@ -55,11 +59,12 @@ Text getTxtWhiteColor({required String msg,
   );
 }
 
-Text getTxtBlackColor({required String msg,
-  double fontSize = 15,
-  FontWeight fontWeight = FontWeight.normal,
-  int? maxLines,
-  TextAlign textAlign = TextAlign.start}) {
+Text getTxtBlackColor(
+    {required String msg,
+    double fontSize = 15,
+    FontWeight fontWeight = FontWeight.normal,
+    int? maxLines,
+    TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
     textAlign: textAlign,
@@ -71,11 +76,12 @@ Text getTxtBlackColor({required String msg,
   );
 }
 
-Text getTxtGreyColor({required String msg,
-  double fontSize = 15,
-  FontWeight fontWeight = FontWeight.normal,
-  int? maxLines,
-  TextAlign textAlign = TextAlign.start}) {
+Text getTxtGreyColor(
+    {required String msg,
+    double fontSize = 15,
+    FontWeight fontWeight = FontWeight.normal,
+    int? maxLines,
+    TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
     textAlign: textAlign,
@@ -87,12 +93,13 @@ Text getTxtGreyColor({required String msg,
   );
 }
 
-Text getTxtColor({required String msg,
-  required Color txtColor,
-  double fontSize = 15,
-  FontWeight fontWeight = FontWeight.normal,
-  int? maxLines,
-  TextAlign textAlign = TextAlign.start}) {
+Text getTxtColor(
+    {required String msg,
+    required Color txtColor,
+    double fontSize = 15,
+    FontWeight fontWeight = FontWeight.normal,
+    int? maxLines,
+    TextAlign textAlign = TextAlign.start}) {
   return Text(
     msg,
     textAlign: textAlign,
@@ -102,11 +109,12 @@ Text getTxtColor({required String msg,
   );
 }
 
-TextStyle _getFontStyle({required Color txtColor,
-  double fontSize = 15,
-  FontWeight fontWeight = FontWeight.normal,
-  String fontFamily = AssetsConst.ZILLASLAB_FONT,
-  TextDecoration txtDecoration = TextDecoration.none}) {
+TextStyle _getFontStyle(
+    {required Color txtColor,
+    double fontSize = 15,
+    FontWeight fontWeight = FontWeight.normal,
+    String fontFamily = AssetsConst.ZILLASLAB_FONT,
+    TextDecoration txtDecoration = TextDecoration.none}) {
   return TextStyle(
       color: txtColor,
       fontSize: fontSize,
@@ -117,11 +125,12 @@ TextStyle _getFontStyle({required Color txtColor,
 
 //  {END TEXT VIEW}
 
-Widget edtPwdField({required TextEditingController control,
-  bool pwdVisible = false,
-  bool isRect = true,
-  IconData icons = Icons.lock_outline,
-  Function? pwdVisibleClick}) {
+Widget edtPwdField(
+    {required TextEditingController control,
+    bool pwdVisible = false,
+    bool isRect = true,
+    IconData icons = Icons.lock_outline,
+    Function? pwdVisibleClick}) {
   return TextFormField(
     controller: control,
     decoration: InputDecoration(
@@ -129,7 +138,7 @@ Widget edtPwdField({required TextEditingController control,
       contentPadding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
       border: OutlineInputBorder(
           borderRadius:
-          isRect ? BorderRadius.circular(0) : BorderRadius.circular(30)),
+              isRect ? BorderRadius.circular(0) : BorderRadius.circular(30)),
       hintText: "Password",
       prefixIcon: Icon(icons),
       suffixIcon: IconButton(
@@ -151,13 +160,14 @@ Widget edtPwdField({required TextEditingController control,
   );
 }
 
-Widget edtDobField({required TextEditingController control,
-  bool isRect = true,
-  validate,
-  IconData? icons,
-  Color iconColor = Colors.grey,
-  String title = '',
-  Function? click}) {
+Widget edtDobField(
+    {required TextEditingController control,
+    bool isRect = true,
+    validate,
+    IconData? icons,
+    Color iconColor = Colors.grey,
+    String title = '',
+    Function? click}) {
   return TextFormField(
     onTap: () => click,
     validator: validate,
@@ -166,7 +176,7 @@ Widget edtDobField({required TextEditingController control,
       contentPadding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
       border: OutlineInputBorder(
           borderRadius:
-          isRect ? BorderRadius.circular(0) : BorderRadius.circular(30)),
+              isRect ? BorderRadius.circular(0) : BorderRadius.circular(30)),
       hintText: title,
       prefixIcon: Icon(
         icons,
@@ -182,18 +192,19 @@ Widget edtDobField({required TextEditingController control,
   );
 }
 
-Widget edtRectField({TextEditingController? control,
-  String hint = '',
-  validate,
-  IconData? icons,
-  bool isRect = true,
-  int txtLength = 32,
-  keyboardType,
-  bool isReadOnly = false,
-  int maxLine = 1,
-  double contentVerticalPadding = 5,
-  double contentHoriPadding = 5,
-  textCapitalization = TextCapitalization.words}) {
+Widget edtRectField(
+    {TextEditingController? control,
+    String hint = '',
+    validate,
+    IconData? icons,
+    bool isRect = true,
+    int txtLength = 32,
+    keyboardType,
+    bool isReadOnly = false,
+    int maxLine = 1,
+    double contentVerticalPadding = 5,
+    double contentHoriPadding = 5,
+    textCapitalization = TextCapitalization.words}) {
   return TextFormField(
       textCapitalization: textCapitalization,
       //TextCapitalization.words,
@@ -211,7 +222,7 @@ Widget edtRectField({TextEditingController? control,
             horizontal: contentHoriPadding, vertical: contentVerticalPadding),
         border: OutlineInputBorder(
             borderRadius:
-            isRect ? BorderRadius.circular(0) : BorderRadius.circular(30)),
+                isRect ? BorderRadius.circular(0) : BorderRadius.circular(30)),
         hintText: hint,
         prefixIcon: Icon(icons),
         labelText: hint,
@@ -221,9 +232,9 @@ Widget edtRectField({TextEditingController? control,
 
 Widget edtDateField(Function dateClick,
     {String date = '',
-      String title = '',
-      Color titleColor = ColorConst.BLACK_COLOR,
-      Color? bgColor}) {
+    String title = '',
+    Color titleColor = ColorConst.BLACK_COLOR,
+    Color? bgColor}) {
   return Expanded(
     child: InkWell(
       onTap: () => dateClick,
@@ -301,8 +312,7 @@ Widget edtCommentField(TextEditingController edtController) {
   );
 }
 
-Widget raisedRoundAppColorBtn(String txt, Function btnClick) =>
-    ButtonTheme(
+Widget raisedRoundAppColorBtn(String txt, Function btnClick) => ButtonTheme(
 //  minWidth: double.infinity,
       height: 45,
       child: ElevatedButton(
@@ -358,12 +368,13 @@ AppBar getAppBar({required String title, double fontSize = 15}) {
           msg: title, fontWeight: FontWeight.bold, fontSize: fontSize));
 }
 
-AppBar getAppBarWithBackBtn({String title = '',
-  Color bgColor = ColorConst.WHITE_COLOR,
-  double fontSize = 15,
-  String titleTag = '',
-  Widget? icon,
-  List<Widget>? actions}) {
+AppBar getAppBarWithBackBtn(
+    {String title = '',
+    Color bgColor = ColorConst.WHITE_COLOR,
+    double fontSize = 15,
+    String titleTag = '',
+    Widget? icon,
+    List<Widget>? actions}) {
   return AppBar(
     backgroundColor: bgColor,
     leading: icon,
@@ -409,34 +420,33 @@ onWillPop() async {
   Get.dialog(widget);
 }
 
-showCustomDialog() =>
-    showDialog(
-        context: Get.context!,
-        barrierDismissible: false,
-        builder: (BuildContext ctx) {
-          return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)), //this right here
-              child: Container(
-                height: 150,
-                width: 130,
-                child: Container(
-                  child: new Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      getTxtBlackColor(
-                          msg: "Loading...",
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ],
+showCustomDialog() => showDialog(
+    context: Get.context!,
+    barrierDismissible: false,
+    builder: (BuildContext ctx) {
+      return Dialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)), //this right here
+          child: Container(
+            height: 150,
+            width: 130,
+            child: Container(
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-              ));
-        });
+                  getTxtBlackColor(
+                      msg: "Loading...",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
+                ],
+              ),
+            ),
+          ));
+    });
 
 Widget showError(String? error) {
   return Visibility(
@@ -448,7 +458,7 @@ showSnackbar(
     {String title = '', String subTitle = '', bool isSuccess = false}) {
   Get.snackbar(title, subTitle,
       backgroundColor:
-      isSuccess ? ColorConst.GREEN_COLOR : ColorConst.RED_COLOR,
+          isSuccess ? ColorConst.GREEN_COLOR : ColorConst.RED_COLOR,
       colorText: ColorConst.WHITE_COLOR,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: 3));
@@ -458,40 +468,40 @@ imagePickerDialog({Function? pickImg}) {
   Widget dialog = AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       title:
-      getTxtBlackColor(msg: 'Select Option', fontWeight: FontWeight.bold),
+          getTxtBlackColor(msg: 'Select Option', fontWeight: FontWeight.bold),
       content: Container(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              GestureDetector(
-                onTap: () async {
-                  Get.back();
-                  // var image = await ImagePicker.pickImage(source: ImageSource.camera);
-                  // getImage(ImageSource.camera, pickImg);
-                  // getImageFromCamera(context, 0, selectedfile);
-                },
-                child: Container(
-                    padding: EdgeInsets.all(15),
-                    child: getTxtBlackColor(msg: 'Take Photo')),
-              ),
-              Divider(
-                color: Colors.grey,
-                height: 1,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Get.back();
-                    // getImage(ImageSource.gallery, pickImg);
-                    // var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-                    // getImageFromCamera(context, 1, selectedfile);
-                  },
-                  child: Container(
-                      padding: EdgeInsets.all(15),
-                      child: getTxtBlackColor(msg: 'Choose From Gallery'))),
-            ],
-          )));
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () async {
+              Get.back();
+              // var image = await ImagePicker.pickImage(source: ImageSource.camera);
+              // getImage(ImageSource.camera, pickImg);
+              // getImageFromCamera(context, 0, selectedfile);
+            },
+            child: Container(
+                padding: EdgeInsets.all(15),
+                child: getTxtBlackColor(msg: 'Take Photo')),
+          ),
+          Divider(
+            color: Colors.grey,
+            height: 1,
+          ),
+          GestureDetector(
+              onTap: () {
+                Get.back();
+                // getImage(ImageSource.gallery, pickImg);
+                // var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                // getImageFromCamera(context, 1, selectedfile);
+              },
+              child: Container(
+                  padding: EdgeInsets.all(15),
+                  child: getTxtBlackColor(msg: 'Choose From Gallery'))),
+        ],
+      )));
   Get.dialog(dialog);
 }
 
@@ -540,7 +550,8 @@ imagePickerDialog({Function? pickImg}) {
 //   }
 // }
 
-Widget getCacheImage({String url = '',
+Widget getCacheImage({
+  String url = '',
   String assetPath = '',
   Color? colorPath,
   File? filePath,
@@ -562,10 +573,10 @@ Widget getCacheImage({String url = '',
     ),
   );
   if (colorPath != null) {
+    //Only color show in File
     imgWidget = Container(
       width: width,
       height: height,
-      decoration: isShowBorderRadius ? border : BoxDecoration(),
       color: colorPath,
     );
   } else if (assetPath.length > 0) {
@@ -614,26 +625,26 @@ Widget getCacheImage({String url = '',
 Widget getPlaceHolder(int placeHolderPos, double height, double width) {
   switch (placeHolderPos) {
     case 0:
-    // LOGO
+      // LOGO
       return Container(
         width: width,
         height: height,
         child: Image.asset(AssetsConst.LOGO_IMG),
       );
     case 1:
-    // Grey Shade
+      // Grey Shade
       return Container(
         width: width,
         height: height,
         color: Colors.grey[400],
       );
-  // case 2:
-  //   // Upload
-  //   return Container(
-  //     width: width,
-  //     height: height,
-  //     child: Icon(Icons.upload_file),
-  //   );
+    // case 2:
+    //   // Upload
+    //   return Container(
+    //     width: width,
+    //     height: height,
+    //     child: Icon(Icons.upload_file),
+    //   );
     default:
       return Container(
         width: width,
@@ -675,10 +686,10 @@ Widget showLoader({bool isShowDialog = false}) {
   );
   return isShowDialog
       ? AlertDialog(
-      scrollable: true,
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      content: content)
+          scrollable: true,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          content: content)
       : content;
 }
 
@@ -695,16 +706,81 @@ Widget getList({
   required double height,
   required int itemCount,
   Axis scrollDirection = Axis.vertical,
+  ScrollPhysics? physics,
   required Function widget,
 }) {
   return SizedBox(
     height: height,
     child: ListView.builder(
-      physics: BouncingScrollPhysics(),
+      // physics: BouncingScrollPhysics(),
+      physics: physics != null ? physics : BouncingScrollPhysics(),
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
       itemCount: itemCount,
       itemBuilder: (context, index) => widget(context, index),
+    ),
+  );
+}
+
+Widget getGrid({
+  // required double height,
+  required int itemCount,
+  int crossAxisCount = 2,
+  double childAspectRatio = (1.5 / 1.8),
+  ScrollPhysics? physics,
+  required Function widget,
+}) {
+  return GridView.builder(
+    itemCount: itemCount,
+    shrinkWrap: true,
+    physics: physics != null ? physics : BouncingScrollPhysics(),
+    // physics: NeverScrollableScrollPhysics(),
+    padding: EdgeInsets.all(0),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: crossAxisCount,
+      childAspectRatio: childAspectRatio,
+    ),
+    itemBuilder: (context, index) => widget(context, index),
+  );
+}
+
+Widget getStaggered({
+  required double height,
+  required int itemCount,
+  int crossAxisCount = 2,
+  double childAspectRatio = (1.5 / 1.8),
+  required Function widget,
+  ScrollPhysics? physics,
+}) {
+  return StaggeredGridView.countBuilder(
+      crossAxisCount: crossAxisCount,
+      mainAxisSpacing: 1.0,
+      crossAxisSpacing: 1.0,
+      shrinkWrap: true,
+      padding: EdgeInsets.all(0),
+      staggeredTileBuilder: (int index) => StaggeredTile.extent(1, height),
+      physics: physics != null ? physics : BouncingScrollPhysics(),
+      itemCount: itemCount,
+      itemBuilder: (BuildContext context, int index) => widget(context, index));
+}
+Widget getHeading(
+    {String title = '', bool viewAllShow = true, Function? onClick}) {
+  return Container(
+    margin: EdgeInsets.only(left: 8, right: 8, bottom: 15, top: 10),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        getTxtBlackColor(
+            msg: title, fontSize: 19, fontWeight: FontWeight.w700),
+        if (viewAllShow)
+          InkWell(
+            onTap: ()=>onClick!(title),
+            child: Container(
+              child: getTxtAppColor(
+                  msg: 'View All', fontSize: 15, fontWeight: FontWeight.w800),
+            ),
+          )
+      ],
     ),
   );
 }
