@@ -7,6 +7,7 @@ import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DimenSize.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
+import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
 import 'package:wallpaper/view/home/BannerImgItem.dart';
 import 'package:wallpaper/view/home/CircleCategoryItem.dart';
@@ -106,16 +107,19 @@ class HomePage extends GetView<HomeController> {
             itemCount: categoryBean().length,
             widget: (context, index) {
               CategoryBean item = categoryBean()[index];
-              return Container(
-                padding: EdgeInsets.only(top: 5, bottom: 5),
-                child: Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Center(
-                    child: Container(
-                        padding: EdgeInsets.only(left: 20, right: 20),
-                        child: getTxtBlackColor(msg: '${item.name}')),
+              return InkWell(
+                onTap: ()=>Get.toNamed(RoutersConst.list),
+                child: Container(
+                  padding: EdgeInsets.only(top: 5, bottom: 5),
+                  child: Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                      child: Container(
+                          padding: EdgeInsets.only(left: 20, right: 20),
+                          child: getTxtBlackColor(msg: '${item.name}')),
+                    ),
                   ),
                 ),
               );
@@ -129,7 +133,7 @@ class HomePage extends GetView<HomeController> {
         widget: (context, index) {
           CategoryBean item = categoryBean()[index];
           return InkWell(
-            onTap: () {},
+            onTap: ()=>Get.toNamed(RoutersConst.list),
             child: Container(
               margin: EdgeInsets.only(right: 8, left: 8),
               child: Stack(
