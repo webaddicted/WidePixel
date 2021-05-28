@@ -14,6 +14,7 @@ import 'package:wallpaper/view/home/CircleCategoryItem.dart';
 import 'package:wallpaper/view/home/GridItem.dart';
 import 'package:wallpaper/view/home/HomeCategoryItem.dart';
 import 'package:wallpaper/view/home/LargeSmallItem.dart';
+import 'package:wallpaper/view/search/SearchPage.dart';
 
 class HomePage extends GetView<HomeController> {
   @override
@@ -75,10 +76,15 @@ class HomePage extends GetView<HomeController> {
       actions: [
         IconButton(
             icon: Icon(
-              Icons.search_rounded,
+              Icons.search,
               color: ColorConst.BLACK_COLOR,
             ),
-            onPressed: () {}),
+            onPressed: () async{
+             await showSearch<int>(
+                context: Get.context!,
+                delegate: SearchItem(),
+              );
+            }),
         IconButton(
             icon: Icon(
               Icons.notifications_none_outlined,
