@@ -26,7 +26,7 @@ CategoryBean('Random', '', 'https://cdn.wallpapersafari.com/17/16/1lefPD.jpg'),
   List<CategoryBean>  colorCategoryBean() =>[ 
   CategoryBean('Black', '#000000',
       'https://c4.wallpaperflare.com/wallpaper/636/353/280/spider-man-wallpaper-preview.jpg'),
-  CategoryBean('White', '#FFFFFF',
+  CategoryBean('White', '#EDEADE',
       'https://bestwallpapers.in/wp-content/uploads/2018/04/cats-kitten-cute-white-brown-5k-wallpaper-2560x1600.jpg'),
   CategoryBean('Red', '#FF0000',
       'https://images.hdqwalls.com/wallpapers/red-mask-neon-eyes-4k-0k.jpg'),
