@@ -9,7 +9,9 @@ import 'package:wallpaper/utils/constant/DimenSize.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
 import 'package:wallpaper/view/home/CircleCategoryItem.dart';
+import 'package:wallpaper/view/home/GridItem.dart';
 import 'package:wallpaper/view/home/HomeCategoryItem.dart';
+import 'package:wallpaper/view/home/LargeSmallItem.dart';
 
 class HomePage extends GetView<HomeController> {
   @override
@@ -26,9 +28,15 @@ class HomePage extends GetView<HomeController> {
         SliverList(
             delegate: SliverChildListDelegate(
           [
+            CircleCategoryItem(ApiConstant.Circle_Color_50),
+            SizedBox(height: 10),
             categoryTag(),
             SizedBox(height: 10),
+            LargeSmallItem(ApiConstant.Rect_100_15),
+            SizedBox(height: 10),
             categoryWithImg(),
+            SizedBox(height: 10),
+            GridItem(ApiConstant.Rect_220_155),
             SizedBox(height: 10),
             HomeCategoryItem(ApiConstant.Rect_220_155),
             SizedBox(height: 10),
@@ -36,7 +44,7 @@ class HomePage extends GetView<HomeController> {
             SizedBox(height: 10),
             HomeCategoryItem(ApiConstant.Rect_100_15),
             SizedBox(height: 10),
-            CircleCategoryItem(ApiConstant.Circle_Color_50),
+
           ],
         ))
       ],
