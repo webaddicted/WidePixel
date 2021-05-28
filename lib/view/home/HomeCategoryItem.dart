@@ -14,7 +14,7 @@ class HomeCategoryItem extends StatelessWidget {
   String heigthWidth;
 
   HomeCategoryItem(this.heigthWidth);
-
+  var data = categoryBean();
   @override
   Widget build(BuildContext context) {
     double height = 220;
@@ -25,6 +25,10 @@ class HomeCategoryItem extends StatelessWidget {
     } else if (heigthWidth == ApiConstant.Rect_100_15) {
       height = 100;
       width = Get.width / 1.7;
+    }else if(heigthWidth == ApiConstant.Rect_320_15){
+      height = 170;
+      width = Get.width / 1.2;
+      data = colorCategoryBean();
     }
 
     return Column(
@@ -32,14 +36,14 @@ class HomeCategoryItem extends StatelessWidget {
         getHeading(title: heigthWidth, onClick: (String title) {}),
         getList(
             height: height,
-            itemCount: categoryBean().length,
+            itemCount: data.length,
             widget: (context, index) => getView(index, height, width))
       ],
     );
   }
 
   Widget getView(int index, double height, double width) {
-    CategoryBean item = categoryBean()[index];
+    CategoryBean item = data[index];
     return Container(
         margin: EdgeInsets.only(left: 5, right: 5),
         child: SizedBox(
