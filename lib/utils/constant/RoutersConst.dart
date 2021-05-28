@@ -4,7 +4,7 @@ class RoutersConst {
   static const welcome_page = '/welcome';
   static const interest_page = '/interest';
   static const home = '/home';
-
-  static String get_start = '/getstart';
-
+  static const get_start = '/getstart';
+  static const list = '/list';
+  static const detail = '/detail';
 }
