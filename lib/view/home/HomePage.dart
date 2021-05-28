@@ -8,6 +8,7 @@ import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DimenSize.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
+import 'package:wallpaper/view/home/BannerImgItem.dart';
 import 'package:wallpaper/view/home/CircleCategoryItem.dart';
 import 'package:wallpaper/view/home/GridItem.dart';
 import 'package:wallpaper/view/home/HomeCategoryItem.dart';
@@ -44,7 +45,9 @@ class HomePage extends GetView<HomeController> {
             SizedBox(height: 10),
             HomeCategoryItem(ApiConstant.Rect_100_15),
             SizedBox(height: 10),
-
+            HomeCategoryItem(ApiConstant.Rect_320_15),
+            SizedBox(height: 10),
+            BannerImgItem(ApiConstant.Rect_320_15)
           ],
         ))
       ],
