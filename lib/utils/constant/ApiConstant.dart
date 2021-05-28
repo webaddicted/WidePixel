@@ -14,6 +14,8 @@ class ApiConstant {
   static var ACCESS_TOKEN = '';
 
   static var Rect_220_155 = 'Rect_220_155';
+  static var Rect_320_15 = 'Rect_320_15';
+
   static var Rect_100_15 = 'Rect_100_15';
 
   static String Circle_100 = 'Circle 100';
