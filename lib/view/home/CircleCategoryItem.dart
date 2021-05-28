@@ -14,25 +14,32 @@ class CircleCategoryItem extends StatelessWidget {
   String heigthWidth;
 
   CircleCategoryItem(this.heigthWidth);
+
   var data = categoryBean();
+
   @override
   Widget build(BuildContext context) {
     double height = 100;
     double width = 100;
-    if(heigthWidth == ApiConstant.Circle_100){
-       height = 100;
-       width = 100;
-       data = categoryBean();
-    }else if(heigthWidth == ApiConstant.Circle_Color_50){
-      height = 80;
-      width = 80;
+    if (heigthWidth == ApiConstant.Circle_100) {
+      height = 100;
+      width = 100;
+      data = categoryBean();
+    } else if (heigthWidth == ApiConstant.Circle_Color_50) {
+      height = 50;
+      width = 50;
       data = colorCategoryBean();
     }
 
-    return getList(
-        height: height,
-        itemCount: data.length,
-        widget: (context, index) => getView(index, height, width));
+    return Column(
+      children: [
+        getHeading(title: heigthWidth, onClick: (String title) {}),
+        getList(
+            height: height,
+            itemCount: data.length,
+            widget: (context, index) => getView(index, height, width)),
+      ],
+    );
   }
 
   Widget getView(int index, double height, double width) {
@@ -43,17 +50,18 @@ class CircleCategoryItem extends StatelessWidget {
           child: Stack(
             children: [
               if (heigthWidth == ApiConstant.Circle_Color_50)
-                Container(
-                  width: width,
-                  height: height,
-                  // decoration:  BoxDecoration(color: Colors.transparent),
-                  color: Colors.yellow,
-                ),
-                // getCacheImage(
-                //   colorPath: colorFromHex(item.color!),
-                //   isCircle: true,
+                // Container(
+                //   width: width,
                 //   height: height,
-                //   width: width),
+                //
+                //   // decoration:  BoxDecoration(color: Colors.transparent),
+                //   color: Colors.yellow,
+                // ),
+                getCacheImage(
+                    colorPath: colorFromHex(item.color!),
+                    isCircle: true,
+                    height: height,
+                    width: width),
               if (heigthWidth == ApiConstant.Circle_100)
                 getCacheImage(
                     url: item.url,
@@ -69,4 +77,6 @@ class CircleCategoryItem extends StatelessWidget {
           ),
         ));
   }
+
+
 }
