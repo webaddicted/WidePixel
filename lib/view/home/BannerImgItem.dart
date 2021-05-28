@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
-import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
+import 'package:wallpaper/utils/constant/RoutersConst.dart';
 
 /// Author : Deepak Sharma(Webaddicted)
 /// Email : deepaksharmatheboss@gmail.com
@@ -12,6 +12,7 @@ import 'package:wallpaper/utils/constant/DummyData.dart';
 
 class BannerImgItem extends StatelessWidget {
   String heigthWidth;
+  final _current = 0.obs;
 
   BannerImgItem(this.heigthWidth);
 
@@ -19,35 +20,44 @@ class BannerImgItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = 220;
-    double width = 155;
-    if (heigthWidth == ApiConstant.Rect_220_155) {
-      height = 220;
-      width = 155;
-    } else if (heigthWidth == ApiConstant.Rect_100_15) {
-      height = 100;
-      width = Get.width / 1.7;
-    } else if (heigthWidth == ApiConstant.Rect_320_15) {
-      height = 170;
-      width = Get.width ;
-      data = colorCategoryBean();
-    }
-
     return Column(
       children: [
-        getHeading(title: heigthWidth, onClick: (String title) {}),
         CarouselSlider.builder(
           itemCount: data.length,
+          options: CarouselOptions(
+              aspectRatio: 2,
+//          enlargeCenterPage: true,
+              scrollDirection: Axis.horizontal,
+              autoPlay: true,
+              // pauseAutoPlayInFiniteScroll: true
+              onPageChanged: (index, reason) {
+                _current.value = index;
+              }),
           itemBuilder: (BuildContext context, int itemIndex, int realIndex) =>
               getSliderItem(
-                  itemIndex: itemIndex, realIndex: realIndex, onTap: () {}),
-          options: CarouselOptions(
-            aspectRatio: 2.0,
-//          enlargeCenterPage: true,
-            scrollDirection: Axis.horizontal,
-            autoPlay: true,
-          ),
-        )
+                  itemIndex: itemIndex,
+                  realIndex: realIndex,
+                  onTap: () {
+                    Get.toNamed(RoutersConst.list);
+                  }),
+        ),
+        Obx(() => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: data.map((url) {
+                int index = data.indexOf(url);
+                return Container(
+                  width: 8.0,
+                  height: 8.0,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _current == index
+                        ? Color.fromRGBO(0, 0, 0, 0.9)
+                        : Color.fromRGBO(0, 0, 0, 0.4),
+                  ),
+                );
+              }).toList(),
+            ))
       ],
     );
   }
@@ -55,7 +65,7 @@ class BannerImgItem extends StatelessWidget {
   Widget getSliderItem({int itemIndex = 0, int? realIndex, Function? onTap}) {
     var item = data[itemIndex];
     return Container(
-      margin: EdgeInsets.all(5.0),
+      margin: EdgeInsets.all(1),
       child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: Stack(
