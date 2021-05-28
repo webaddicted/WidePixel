@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:wallpaper/data/bean/CategoryBean.dart';
 import 'package:wallpaper/utils/common/GlobalUtilities.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
+import 'package:wallpaper/utils/constant/RoutersConst.dart';
 
 /// Author : Deepak Sharma(Webaddicted)
 /// Email : deepaksharmatheboss@gmail.com
@@ -30,19 +32,24 @@ class CircleCategoryItem extends StatelessWidget {
       width = 50;
       data = colorCategoryBean();
     }
-
     return Column(
       children: [
         getHeading(title: heigthWidth, onClick: (String title) {}),
         getList(
             height: height,
             itemCount: data.length,
-            widget: (context, index) => getView(index, height, width)),
+            widget: (context, index) =>
+                getView(index: index,
+                    height: height,
+                    width: width,
+                    onClick: () => Get.toNamed(RoutersConst.list)
+                )),
       ],
     );
   }
 
-  Widget getView(int index, double height, double width) {
+  Widget getView(
+      {int index = 0, double height = 50, double width = 50, Function? onClick}) {
     CategoryBean item = data[index];
     return Container(
         margin: EdgeInsets.only(left: 5, right: 5),
@@ -50,13 +57,6 @@ class CircleCategoryItem extends StatelessWidget {
           child: Stack(
             children: [
               if (heigthWidth == ApiConstant.Circle_Color_50)
-                // Container(
-                //   width: width,
-                //   height: height,
-                //
-                //   // decoration:  BoxDecoration(color: Colors.transparent),
-                //   color: Colors.yellow,
-                // ),
                 getCacheImage(
                     colorPath: colorFromHex(item.color!),
                     isCircle: true,
@@ -72,7 +72,9 @@ class CircleCategoryItem extends StatelessWidget {
                   child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                          splashColor: ColorConst.SPLASH_COLOR, onTap: () {}))),
+                          splashColor: ColorConst.SPLASH_COLOR, onTap: () {
+                        onClick!();
+                      }))),
             ],
           ),
         ));
