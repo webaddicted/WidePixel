@@ -19,18 +19,23 @@ class HomeCategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = 220;
     double width = 155;
-    if(heigthWidth == ApiConstant.Rect_220_155){
-       height = 220;
-       width = 155;
-    }else if(heigthWidth == ApiConstant.Rect_100_15){
+    if (heigthWidth == ApiConstant.Rect_220_155) {
+      height = 220;
+      width = 155;
+    } else if (heigthWidth == ApiConstant.Rect_100_15) {
       height = 100;
-      width = Get.width/1.7;
+      width = Get.width / 1.7;
     }
 
-    return getList(
-        height: height,
-        itemCount: categoryBean().length,
-        widget: (context, index) => getView(index, height, width));
+    return Column(
+      children: [
+        getHeading(title: heigthWidth, onClick: (String title) {}),
+        getList(
+            height: height,
+            itemCount: categoryBean().length,
+            widget: (context, index) => getView(index, height, width))
+      ],
+    );
   }
 
   Widget getView(int index, double height, double width) {
