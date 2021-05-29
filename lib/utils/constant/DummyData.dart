@@ -4,7 +4,7 @@ List<CategoryBean>  categoryBean() =>[
 CategoryBean('Abstract', '',
 'https://img.freepik.com/free-vector/gradient-liquid-abstract-background_52683-60469.jpg?size=626&ext=jpg'),
 CategoryBean('Nature', '',
-'https://bsmedia.business-standard.com/_media/bs/img/article/2020-07/28/full/1595904030-4016.jpg'),
+'https://wallpaperaccess.com/full/1180075.jpg'),
 CategoryBean('Architecture', '',
 'https://static.dezeen.com/uploads/2021/05/oyo-architects-house-dede-belgium-residential-architecture_dezeen_sq3-411x411.jpg'),
 CategoryBean('Animals', '',
