@@ -7,4 +7,6 @@ class RoutersConst {
   static const get_start = '/getstart';
   static const list = '/list';
   static const detail = '/detail';
+
+  static var profile = '/profile';
 }
