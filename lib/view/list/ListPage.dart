@@ -6,6 +6,7 @@ import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DimenSize.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
+import 'package:wallpaper/utils/constant/StrConst.dart';
 import 'package:wallpaper/view/list/PhotoListItem.dart';
 
 class ListPage extends GetView<HomeController> {
@@ -56,14 +57,42 @@ class ListPage extends GetView<HomeController> {
       //         color: ColorConst.BLACK_COLOR,
       //       ),
       //       onPressed: () {}),
-        IconButton(
-            icon: Icon(
-              Icons.more_vert_rounded,
-              color: ColorConst.BLACK_COLOR,
-            ),
-            onPressed: () {
-
-            }),
+        PopupMenuButton<int>(
+          // key: _key,
+          icon: Icon(
+            Icons.view_quilt_sharp,
+            color: ColorConst.BLACK_COLOR,
+          ),
+          itemBuilder: (context) {
+            return <PopupMenuEntry<int>>[
+              PopupMenuItem(
+                  child: getTxtBlackColor(msg: 'Staggered view'),
+                  value: 0),
+              PopupMenuItem(
+                  child: getTxtBlackColor(msg: 'Vertical'), value: 1),
+              PopupMenuItem(
+                  child: getTxtBlackColor(msg: 'Gide (2)'), value: 2),
+              PopupMenuItem(
+                  child: getTxtBlackColor(msg: 'Gide (3)'), value: 3),
+              // PopupMenuItem(child: getTxtBlackColor(msg: 'Download'), value: 4),
+              // PopupMenuItem(child: getTxtBlackColor(msg: 'Download'), value: 5),
+            ];
+          },
+          onSelected: (index) {
+            switch (index) {
+              case 0:
+                {
+                  showSnackbar(
+                      title: StrConst.APP_NAME,
+                      subTitle: 'wallpaper',
+                      isSuccess: true);
+                  break;
+                }
+              default:
+                break;
+            }
+          },
+        )
       ],
       elevation: 50,
       backgroundColor: Colors.transparent,
