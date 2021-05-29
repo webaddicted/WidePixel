@@ -9,6 +9,7 @@ import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
+import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
 
 class DetailPage extends GetView<HomeController> {
@@ -16,6 +17,7 @@ class DetailPage extends GetView<HomeController> {
   final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
   late PageController pageController;
   int index = 0;
+
   @override
   Widget build(BuildContext context) {
     pageController = PageController(initialPage: index);
@@ -28,8 +30,9 @@ class DetailPage extends GetView<HomeController> {
     return Container(
         child: Stack(
       children: [
-        getImageView(),
-        getCacheImage(url: categoryBean()[1].url, fit: BoxFit.fill),
+        InkWell(
+            onTap: () => Get.toNamed(RoutersConst.fullimage),
+            child: getCacheImage(url: categoryBean()[1].url, fit: BoxFit.fill)),
         toolbar(),
         slidingUp()
       ],
@@ -53,7 +56,9 @@ class DetailPage extends GetView<HomeController> {
                   Icons.help_outline_sharp,
                   color: ColorConst.GREY_SHADE,
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Get.toNamed(RoutersConst.preview);
+                }),
             PopupMenuButton<int>(
               // key: _key,
               icon: Icon(
@@ -77,10 +82,14 @@ class DetailPage extends GetView<HomeController> {
               },
               onSelected: (index) {
                 switch (index) {
-                  case 0:{
-                    showSnackbar(title: StrConst.APP_NAME, subTitle: 'wallpaper', isSuccess: true);
-                    break;
-                  }
+                  case 0:
+                    {
+                      showSnackbar(
+                          title: StrConst.APP_NAME,
+                          subTitle: 'wallpaper',
+                          isSuccess: true);
+                      break;
+                    }
                   default:
                     break;
                 }
@@ -160,35 +169,35 @@ class DetailPage extends GetView<HomeController> {
     );
   }
 
-      Widget getImageView() {
-      return Container(
-          child: PhotoViewGallery.builder(
-            scrollPhysics: const BouncingScrollPhysics(),
-            builder: (BuildContext context, int indexss) {
-              String imgurl = categoryBean()[1].url;
-              return PhotoViewGalleryPageOptions(
-                imageProvider: CachedNetworkImageProvider(imgurl),
-                minScale: PhotoViewComputedScale.contained * 0.8,
-                maxScale: PhotoViewComputedScale.covered * 2,
-                // heroAttributes: PhotoViewHeroAttributes(tag: tag),
-              );
-            },
-            itemCount: 1,
-            loadingBuilder: (context, event) => Center(
-              child: Container(
-                width: 20.0,
-                height: 20.0,
-                child: CircularProgressIndicator(
-                  value: event == null
-                      ? 0
-                      : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
-                ),
-              ),
-            ),
-            pageController: pageController,
+  Widget getImageView() {
+    return Container(
+        child: PhotoViewGallery.builder(
+      scrollPhysics: const BouncingScrollPhysics(),
+      builder: (BuildContext context, int indexss) {
+        String imgurl = categoryBean()[1].url;
+        return PhotoViewGalleryPageOptions(
+          imageProvider: CachedNetworkImageProvider(imgurl),
+          minScale: PhotoViewComputedScale.contained * 0.8,
+          maxScale: PhotoViewComputedScale.covered * 2,
+          // heroAttributes: PhotoViewHeroAttributes(tag: tag),
+        );
+      },
+      itemCount: 1,
+      loadingBuilder: (context, event) => Center(
+        child: Container(
+          width: 20.0,
+          height: 20.0,
+          child: CircularProgressIndicator(
+            value: event == null
+                ? 0
+                : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
+          ),
+        ),
+      ),
+      pageController: pageController,
 //      onPageChanged: onPageChanged,
-            enableRotation: true,
+      enableRotation: true,
 //      reverse: true,
-          ));
+    ));
   }
 }
