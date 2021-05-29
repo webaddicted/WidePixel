@@ -1,8 +1,10 @@
 import 'package:get/route_manager.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/view/detail/DetailPage.dart';
+import 'package:wallpaper/view/fullImage/FullImagePage.dart';
 import 'package:wallpaper/view/home/HomePage.dart';
 import 'package:wallpaper/view/list/ListPage.dart';
+import 'package:wallpaper/view/preview/PreviewPage.dart';
 import 'package:wallpaper/view/profile/ProfilePage.dart';
 import 'package:wallpaper/view/welcome/GetStartPage.dart';
 import 'package:wallpaper/view/welcome/InterestPage.dart';
@@ -20,6 +22,9 @@ RoutesPage() => [
   GetPage(name: RoutersConst.list, page: () => ListPage()),
   GetPage(name: RoutersConst.detail, page: () => DetailPage()),
   GetPage(name: RoutersConst.profile, page: () => ProfilePage()),
+  GetPage(name: RoutersConst.fullimage, page: () => FullImagePage()),
+  GetPage(name: RoutersConst.preview, page: () => PreviewPage()),
+
 
   // GetPage(name: RoutersConst.login, page: () => LoginPage()),
   // GetPage(name: "products/:id", page: () => Product()),
