@@ -14,14 +14,30 @@ import 'package:wallpaper/view/home/CircleCategoryItem.dart';
 import 'package:wallpaper/view/home/GridItem.dart';
 import 'package:wallpaper/view/home/HomeCategoryItem.dart';
 import 'package:wallpaper/view/home/LargeSmallItem.dart';
+import 'package:wallpaper/view/list/PhotoListItem.dart';
+import 'package:wallpaper/view/profile/ProfilePage.dart';
+import 'package:wallpaper/view/profile/TextStyles.dart';
 import 'package:wallpaper/view/search/SearchPage.dart';
 
 class HomePage extends GetView<HomeController> {
+  final _selectedIndex = 0.obs;
+  static List<Widget> _widgetOptions = <Widget>[
+    GridItem(ApiConstant.Rect_220_155),
+    PhotoListItem('Nature'),
+    PhotoListItem('Animal'),
+    PhotoListItem('Life'),
+    ProfilePage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: ColorConst.WHITE_COLOR,
-        body: createUi());
+    return Obx(
+      () => Scaffold(
+          bottomNavigationBar: getBottomBar(),
+          backgroundColor: ColorConst.WHITE_COLOR,
+          // body: showBottomItem()
+          body: createUi()),
+    );
   }
 
   Widget createUi() {
@@ -64,7 +80,9 @@ class HomePage extends GetView<HomeController> {
             Icons.sort,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Get.toNamed(RoutersConst.profile);
+          },
         ),
       ),
       title: getTxtBlackColor(
@@ -79,8 +97,8 @@ class HomePage extends GetView<HomeController> {
               Icons.search,
               color: ColorConst.BLACK_COLOR,
             ),
-            onPressed: () async{
-             await showSearch<int>(
+            onPressed: () async {
+              await showSearch<int>(
                 context: Get.context!,
                 delegate: SearchItem(),
               );
@@ -114,7 +132,7 @@ class HomePage extends GetView<HomeController> {
             widget: (context, index) {
               CategoryBean item = categoryBean()[index];
               return InkWell(
-                onTap: ()=>Get.toNamed(RoutersConst.list),
+                onTap: () => Get.toNamed(RoutersConst.list),
                 child: Container(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
                   child: Card(
@@ -139,7 +157,7 @@ class HomePage extends GetView<HomeController> {
         widget: (context, index) {
           CategoryBean item = categoryBean()[index];
           return InkWell(
-            onTap: ()=>Get.toNamed(RoutersConst.list),
+            onTap: () => Get.toNamed(RoutersConst.list),
             child: Container(
               margin: EdgeInsets.only(right: 8, left: 8),
               child: Stack(
@@ -173,5 +191,111 @@ class HomePage extends GetView<HomeController> {
             ),
           );
         });
+  }
+
+  Widget getBottomBar() {
+    return BottomNavigationBar(
+      backgroundColor: ColorConst.WHITE_COLOR,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_bag),
+          title: Text('Order'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.snowshoeing),
+          title: Text('Go Out'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.category),
+          title: Text('Gold'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.wifi),
+          title: Text('Explore'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          title: Text('Profile'),
+        ),
+      ],
+      currentIndex: _selectedIndex.value,
+      selectedItemColor: ColorConst.BLACK_COLOR,
+      unselectedItemColor: ColorConst.GREY_SHADE,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) {
+        _selectedIndex.value = index;
+      },
+    );
+  }
+
+  Widget showBottomItem() {
+    return _selectedIndex.value == 2 || _selectedIndex.value == 4
+        ? Container(
+            child: _widgetOptions.elementAt(_selectedIndex.value),
+          )
+        : Container(
+            color: ColorConst.WHITE_COLOR,
+            padding: EdgeInsets.all(10),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 15.0, right: 10),
+                        child: Icon(
+                          Icons.location_pin,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Home',
+                              textAlign: TextAlign.left,
+                              style: TextStyles.actionTitle,
+                            ),
+                            Text(
+                              'MG Road Bangalore',
+                              textAlign: TextAlign.left,
+                              style: TextStyles.subText,
+                            ),
+                            Divider(
+                              color: ColorConst.BLACK_COLOR,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Container(),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Icon(
+                        Icons.payment,
+                        color: ColorConst.BLACK_COLOR,
+                        size: 25,
+                      ),
+                    ),
+                  ],
+                ),
+                // SearchBar('Search for restaurants, Cusines...'),
+                _widgetOptions.elementAt(_selectedIndex.value),
+              ],
+            ),
+          );
   }
 }
