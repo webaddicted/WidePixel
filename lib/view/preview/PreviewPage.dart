@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
@@ -23,6 +24,7 @@ class PreviewPage extends GetView<HomeController> {
             splashColor: ColorConst.SPLASH_COLOR,
             child: getCacheImage(url: categoryBean()[1].url, fit: BoxFit.fill)),
         toolbar(),
+        Center(child: getTime())
       ],
     ));
   }
@@ -49,5 +51,21 @@ class PreviewPage extends GetView<HomeController> {
         // )
       ]),
     );
+  }
+
+  Widget getTime() {
+    var now = DateTime.now();
+    var formatter = DateFormat('dd-MMMM-yyyy');
+    String formattedDate = formatter.format(now);
+    String formattedTime = DateFormat('hh:mm').format(now);
+    // String formattedTime = DateFormat('hh:mm a').format(now);
+
+    return Column(children: [
+      SizedBox(height: 120),
+      getTxtWhiteColor(
+          msg: formattedTime, fontSize: 78, fontWeight: FontWeight.w700),
+      getTxtWhiteColor(
+          msg: formattedDate, fontSize: 18, fontWeight: FontWeight.w700)
+    ]);
   }
 }
