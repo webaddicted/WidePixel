@@ -56,12 +56,14 @@ class ListPage extends GetView<HomeController> {
       //         color: ColorConst.BLACK_COLOR,
       //       ),
       //       onPressed: () {}),
-      //   IconButton(
-      //       icon: Icon(
-      //         Icons.notifications_none_outlined,
-      //         color: ColorConst.BLACK_COLOR,
-      //       ),
-      //       onPressed: () {}),
+        IconButton(
+            icon: Icon(
+              Icons.more_vert_rounded,
+              color: ColorConst.BLACK_COLOR,
+            ),
+            onPressed: () {
+
+            }),
       ],
       elevation: 50,
       backgroundColor: Colors.transparent,
