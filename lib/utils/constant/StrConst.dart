@@ -18,4 +18,6 @@ class StrConst {
 
   static var skip = 'Skip';
 
+  static String? NO_INTERNET_CONNECTION = 'No Internet Connection';
+
 }
