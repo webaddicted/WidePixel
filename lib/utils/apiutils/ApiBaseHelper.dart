@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:wallpaper/utils/constant/ApiConstant.dart';
 /// Author : Deepak Sharma(Webaddicted)
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
@@ -12,7 +13,7 @@ class ApiBaseHelper {
   static final String url = 'BASE_URL';
   static Alice alice = Alice(showNotification: true);
   static BaseOptions opts = BaseOptions(
-    baseUrl: url,
+    baseUrl: ApiConstant.BASE_URL,
     responseType: ResponseType.json,
     connectTimeout: 30000,
     receiveTimeout: 30000,
