@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:wallpaper/data/bean/CategoryBean.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
+import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DimenSize.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
@@ -25,7 +26,11 @@ class ListPage extends GetView<HomeController> {
         toobar(),
         SliverList(
             delegate: SliverChildListDelegate(
-          [PhotoListItem('Nature')],
+          [PhotoListItem(
+            apiName: ApiConstant.SEARCH_PHOTOS,
+            query: 'Nature',
+          )
+          ],
         ))
       ],
     );
