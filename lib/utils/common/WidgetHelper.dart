@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper/utils/api_response.dart';
 import 'package:wallpaper/utils/common/ValidationHelper.dart';
 import 'package:wallpaper/utils/constant/AssetsConst.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
@@ -693,14 +695,30 @@ Widget showLoader({bool isShowDialog = false}) {
       : content;
 }
 
-// Widget noDataFound() {
-//   return Center(
-//       child: Image.asset(
-//     AssetsConst.NO_DATA_FOUND_IMG,
-//     height: 150,
-//     width: 250,
-//   ));
-// }
+Widget noDataFound() {
+  // return Center(
+  //     child: Image.asset(
+  //   AssetsConst.NO_DATA_FOUND_IMG,
+  //   height: 150,
+  //   width: 250,
+  // ));
+  return Center(
+    child: Container(
+      width: 250,
+      height: 250,
+      child: SvgPicture.asset(
+        AssetsConst.NO_DATA_FOUND,
+        width: Get.width,
+      ),
+      //   decoration: BoxDecoration(
+      //       image: DecorationImage(
+      //           fit: BoxFit.fill,
+      //           image:AssetImage(sliderArrayList[index].sliderImageUrl))),
+      // ),
+    ),
+  );
+}
+
 
 Widget getList({
   required double height,
@@ -751,18 +769,21 @@ Widget getStaggered({
   double childAspectRatio = (1.5 / 1.8),
   required Function widget,
   ScrollPhysics? physics,
+  ScrollController? controller
 }) {
   return StaggeredGridView.countBuilder(
       crossAxisCount: crossAxisCount,
       mainAxisSpacing: 1.0,
       crossAxisSpacing: 1.0,
       shrinkWrap: true,
+  controller: controller,
       padding: EdgeInsets.all(0),
       staggeredTileBuilder: (int index) => StaggeredTile.extent(1, height),
       physics: physics != null ? physics : BouncingScrollPhysics(),
       itemCount: itemCount,
       itemBuilder: (BuildContext context, int index) => widget(context, index));
 }
+
 Widget getHeading(
     {String title = '', bool viewAllShow = true, Function? onClick}) {
   return Container(
@@ -770,11 +791,10 @@ Widget getHeading(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        getTxtBlackColor(
-            msg: title, fontSize: 19, fontWeight: FontWeight.w700),
+        getTxtBlackColor(msg: title, fontSize: 19, fontWeight: FontWeight.w700),
         if (viewAllShow)
           InkWell(
-            onTap: ()=>onClick!(title),
+            onTap: () => onClick!(title),
             child: Container(
               child: getTxtAppColor(
                   msg: 'View All', fontSize: 15, fontWeight: FontWeight.w800),
@@ -783,4 +803,39 @@ Widget getHeading(
       ],
     ),
   );
+}
+
+Widget apiHandler<T>(
+    {required ApiResponse<T> response, Widget? loading, Widget? error}) {
+  if (response.status == null)
+    return Container();
+  else {
+    switch (response.status) {
+      case ApiStatus.LOADING:
+        return loading != null
+            ? loading
+            : Center(
+                child: CircularProgressIndicator(
+                  valueColor:
+                      AlwaysStoppedAnimation<Color>(ColorConst.APP_COLOR),
+                ),
+              );
+        break;
+      case ApiStatus.ERROR:
+        return Center(
+          child: getTxtColor(
+              msg: response.apiError!.errorMessage.toString(),
+              txtColor: ColorConst.RED_COLOR),
+        );
+        // return error != null ? error : showError(response.apierror.errorMessage);
+        break;
+      default:
+        {
+          return Container(
+            color: Colors.amber,
+            child: getTxtAppColor(msg: StrConst.SOMETHING_WENT_WRONG),
+          );
+        }
+    }
+  }
 }
