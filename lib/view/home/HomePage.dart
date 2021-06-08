@@ -23,21 +23,30 @@ class HomePage extends GetView<HomeController> {
   final _selectedIndex = 0.obs;
   static List<Widget> _widgetOptions = <Widget>[
     GridItem(ApiConstant.Rect_220_155),
-    PhotoListItem('Nature'),
-    PhotoListItem('Animal'),
-    PhotoListItem('Life'),
+    PhotoListItem(
+      apiName: ApiConstant.SEARCH_PHOTOS,
+      query: 'Nature',
+    ),
+    PhotoListItem(
+      apiName: ApiConstant.SEARCH_PHOTOS,
+      query: 'Animal',
+    ),
+    PhotoListItem(
+      apiName: ApiConstant.SEARCH_PHOTOS,
+      query: 'Life',
+    ),
     ProfilePage(),
   ];
+  HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-          bottomNavigationBar: getBottomBar(),
-          backgroundColor: ColorConst.WHITE_COLOR,
-          // body: showBottomItem()
-          body: createUi()),
-    );
+    _homeController.photoOrder();
+    return Obx(() => Scaffold(
+        bottomNavigationBar: getBottomBar(),
+        backgroundColor: ColorConst.WHITE_COLOR,
+        // body: showBottomItem()
+        body: createUi()));
   }
 
   Widget createUi() {
@@ -108,7 +117,9 @@ class HomePage extends GetView<HomeController> {
               Icons.notifications_none_outlined,
               color: ColorConst.BLACK_COLOR,
             ),
-            onPressed: () {}),
+            onPressed: () {
+              _homeController.photoOrder();
+            }),
       ],
       elevation: 50,
       backgroundColor: Colors.transparent,
@@ -199,23 +210,28 @@ class HomePage extends GetView<HomeController> {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_bag),
-          title: Text('Order'),
+          // title: Text('Order'),
+          label: 'Order',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.snowshoeing),
-          title: Text('Go Out'),
+          // title: Text('Go Out'),
+          label: 'Go Out',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.category),
-          title: Text('Gold'),
+          // title: Text('Gold'),
+          label: 'Gold',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.wifi),
-          title: Text('Explore'),
+          label: 'Explore',
+          // title: Text('Explore'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          title: Text('Profile'),
+          // title: Text('Profile'),
+          label: 'Profile',
         ),
       ],
       currentIndex: _selectedIndex.value,
