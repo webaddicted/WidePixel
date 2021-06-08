@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper/data/bean/SearchPhotoRespo.dart';
+import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
+import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/view/list/PhotoListItem.dart';
 
 class SearchItem extends SearchDelegate<int> {
@@ -10,8 +13,12 @@ class SearchItem extends SearchDelegate<int> {
     'Nature',
     'Animal',
     'Oh Baby',
-    'Like'
+    'Like',
+    'Beautiful girl'
   ];
+  HomeController _homeController = Get.find();
+
+  List<Results>? results = [];
 
   @override
   Widget buildLeading(BuildContext context) {
@@ -49,7 +56,13 @@ class SearchItem extends SearchDelegate<int> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return PhotoListItem('Nature');
+    // _homeController.searchPic(query: query, currentPage: 1);
+    return PhotoListItem(
+      apiName: ApiConstant.SEARCH_PHOTOS,
+      query: query,
+    );
+
+    // return Obx(() => PhotoListItem('Nature'));
     // final int? searched = int.tryParse(query);
     // if (searched == null || !_data.contains(searched)) {
     //   return Center(
