@@ -11,6 +11,8 @@ class AssetsConst {
   static const String SLIDER1 = 'assets/images/slider1.svg';
   static const String SLIDER2 = 'assets/images/slider2.svg';
   static const String SLIDER3 = 'assets/images/slider3.svg';
+  static const String NO_DATA_FOUND = 'assets/images/no_data_found.svg';
+
   static const String GET_START_BG_IMG = 'assets/images/getstart_bg.jpg';
 
 
