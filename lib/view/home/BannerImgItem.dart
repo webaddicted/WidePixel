@@ -1,6 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper/data/bean/SearchPhotoRespo.dart';
+import 'package:wallpaper/data/bean/search/SearchPicReq.dart';
+import 'package:wallpaper/data/controller/HomeController.dart';
+import 'package:wallpaper/utils/api_response.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
@@ -11,66 +15,86 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 /// Profile : https://github.com/webaddicted
 
 class BannerImgItem extends StatelessWidget {
-  String heigthWidth;
+  String title;
   final _current = 0.obs;
 
-  BannerImgItem(this.heigthWidth);
+  List<Results>? data = [];
 
-  var data = categoryBean();
+  BannerImgItem({required this.title});
+  HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    callApi();
     return Column(
       children: [
-        CarouselSlider.builder(
-          itemCount: data.length,
-          options: CarouselOptions(
-              aspectRatio: 2,
-//          enlargeCenterPage: true,
-              scrollDirection: Axis.horizontal,
-              autoPlay: true,
-              // pauseAutoPlayInFiniteScroll: true
-              onPageChanged: (index, reason) {
-                _current.value = index;
-              }),
-          itemBuilder: (BuildContext context, int itemIndex, int realIndex) =>
-              getSliderItem(
-                  itemIndex: itemIndex,
-                  realIndex: realIndex,
-                  onTap: () {
-                    Get.toNamed(RoutersConst.list);
-                  }),
-        ),
-        Obx(() => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: data.map((url) {
-                int index = data.indexOf(url);
-                return Container(
-                  width: 8.0,
-                  height: 8.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _current == index
-                        ? Color.fromRGBO(0, 0, 0, 0.9)
-                        : Color.fromRGBO(0, 0, 0, 0.4),
-                  ),
-                );
-              }).toList(),
-            ))
+        Obx(() {
+          ApiResponse<SearchPhotoRespo?> respo = _homeController.technologyRespo.value;
+          if (respo.status == ApiStatus.COMPLETED) {
+            // currentPage++;
+            data = respo.data!.results;
+            // results.addAll(respo.data!.results!);
+            // results = respo.data?.results;
+            return data != null && data!.length > 0
+                ? carouselViewList()
+                : noDataFound();
+          } else
+            return apiHandler(response: respo);
+        }),
+        // Obx(() => Row(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: data!.map((url) {
+        //         int index = data!.indexOf(url);
+        //         return Container(
+        //           width: 8.0,
+        //           height: 8.0,
+        //           margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+        //           decoration: BoxDecoration(
+        //             shape: BoxShape.circle,
+        //             color: _current == index
+        //                 ? Color.fromRGBO(0, 0, 0, 0.9)
+        //                 : Color.fromRGBO(0, 0, 0, 0.4),
+        //           ),
+        //         );
+        //       }).toList(),
+        //     ))
       ],
     );
   }
 
+  Widget carouselViewList() {
+    return CarouselSlider.builder(
+      itemCount: data!.length,
+      options: CarouselOptions(
+          aspectRatio: 2,
+//          enlargeCenterPage: true,
+          // pauseAutoPlayInFiniteScroll: true
+          height: 450,
+          scrollDirection: Axis.horizontal,
+          autoPlay: true,
+
+          onPageChanged: (index, reason) {
+            _current.value = index;
+          }),
+      itemBuilder: (BuildContext context, int itemIndex, int realIndex) =>
+          getSliderItem(
+              itemIndex: itemIndex,
+              realIndex: realIndex,
+              onTap: () {
+                Get.toNamed(RoutersConst.list);
+              }),
+    );
+  }
+
   Widget getSliderItem({int itemIndex = 0, int? realIndex, Function? onTap}) {
-    var item = data[itemIndex];
+    var item = data![itemIndex];
     return Container(
       margin: EdgeInsets.all(1),
       child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),
           child: Stack(
             children: <Widget>[
-              Container(width: Get.width, child: getCacheImage(url: item.url)),
+              Container(width: Get.width, child: getCacheImage(url: item.urls!.regular!)),
               Positioned(
                 bottom: 0.0,
                 left: 0.0,
@@ -108,4 +132,11 @@ class BannerImgItem extends StatelessWidget {
           )),
     );
   }
+  void callApi() {
+    // SearchPicReq req = SearchPicReq(page: 1);/**/
+    _homeController.technologyPic(
+        req: SearchPicReq(page: 1, query: title),
+        isFreshCall: false);
+  }
+
 }
