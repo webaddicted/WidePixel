@@ -15,6 +15,7 @@ class ApiConstant {
   static var PHOTOS = 'photos';
   static var SEARCH_PHOTOS = 'search/photos';
 
+
   static var Rect_220_155 = 'Rect_220_155';
   static var Rect_320_15 = 'Rect_320_15';
 
@@ -22,4 +23,13 @@ class ApiConstant {
 
   static String Circle_100 = 'Circle 100';
   static String Circle_Color_50 = 'Circle color 50';
+
+  static String COLOR_IMAGE = 'ColorImage';
+
+
+
 }
+
+enum OrderBy { oldest, popular, latest }
+
+enum SearchOrderBy { latest, relevant }
