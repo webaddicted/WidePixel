@@ -13,7 +13,7 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class GridItem extends StatelessWidget {
+class GridItem extends GetView<HomeController> {
   String title = '';
 
   GridItem({required this.title});
@@ -28,7 +28,11 @@ class GridItem extends StatelessWidget {
     callApi();
     return Column(
       children: [
-        getHeading(title: title, onClick: (String title) {}),
+        getHeading(
+            title: title,
+            onClick: (String title) =>
+                Get.toNamed(RoutersConst.list, arguments: [title])
+        ),
         Obx(() {
           var respo = _homeController.natureRespo.value;
           if (respo.status == ApiStatus.COMPLETED) {
@@ -51,7 +55,6 @@ class GridItem extends StatelessWidget {
         itemCount: 6,
         widget: (context, index) {
           Results item = data![index];
-
           return InkWell(
             onTap: () => Get.toNamed(RoutersConst.list),
             splashColor: ColorConst.SPLASH_COLOR,
