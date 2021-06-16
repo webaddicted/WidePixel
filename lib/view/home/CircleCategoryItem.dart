@@ -16,7 +16,7 @@ import 'package:wallpaper/utils/constant/StrConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class CircleCategoryItem extends StatelessWidget {
+class CircleCategoryItem extends GetView<HomeController> {
   String title = '';
 
   CircleCategoryItem({required this.title});
@@ -50,13 +50,19 @@ class CircleCategoryItem extends StatelessWidget {
                   index: index,
                   height: height,
                   width: width,
-                  onClick: () => Get.toNamed(RoutersConst.list))),
+                  onClick: () =>
+          Get.toNamed(RoutersConst.list, arguments: [data[index].name])),
+          )
         ],
       );
     } else {
       return Column(
         children: [
-          getHeading(title: title, onClick: (String title) {}),
+          getHeading(
+              title: title,
+              onClick: (String title) {
+                  Get.toNamed(RoutersConst.list, arguments: [title]);
+              }),
           Obx(() {
             ApiResponse<SearchPhotoRespo?> respo =
                 _homeController.lifeStyleRespo.value;
@@ -70,7 +76,9 @@ class CircleCategoryItem extends StatelessWidget {
                           index: index,
                           height: height,
                           width: width,
-                          onClick: () => Get.toNamed(RoutersConst.list)))
+                          onClick: () {
+                            Get.toNamed(RoutersConst.detail);
+                          }))
                   : noDataFound();
             } else
               return apiHandler(response: respo);
