@@ -24,67 +24,70 @@ class HomeController extends GetxController {
   final lifeStyleRespo = (ApiResponse<SearchPhotoRespo?>()).obs;
 
   img3Combo({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) img3ComboRespo.value = ApiResponse.loading();
+    img3ComboRespo.value = ApiResponse.loading();
     final data = await _homeRepo.photoOrder(req: req);
     img3ComboRespo.value = data;
   }
 
   photoOrder({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) photoOrderRespo.value = ApiResponse.loading();
+    photoOrderRespo.value = ApiResponse.loading();
     final data = await _homeRepo.photoOrder(req: req);
     photoOrderRespo.value = data;
   }
 
   searchPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) searchPhotoRespo.value = ApiResponse.loading();
+    searchPhotoRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     searchPhotoRespo.value = data;
   }
 
   naturePic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) natureRespo.value = ApiResponse.loading();
+    natureRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     natureRespo.value = data;
   }
 
   girlPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) girlRespo.value = ApiResponse.loading();
+    girlRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     girlRespo.value = data;
   }
 
   carPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) carRespo.value = ApiResponse.loading();
+    carRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     carRespo.value = data;
   }
 
   robotPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) robotRespo.value = ApiResponse.loading();
+    robotRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     robotRespo.value = data;
   }
 
   technologyPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) technologyRespo.value = ApiResponse.loading();
+    technologyRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     technologyRespo.value = data;
   }
   lifeStylePic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) lifeStyleRespo.value = ApiResponse.loading();
+    lifeStyleRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     lifeStyleRespo.value = data;
   }
   moviePic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) movieRespo.value = ApiResponse.loading();
+    movieRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     movieRespo.value = data;
   }
   girlDressPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    // var data = girlDressRespo.value.data;
-    // if(data!=null && data.results!=null &&data.results!.length>0)
+    var respoData = girlDressRespo.value.data;
+    // if(!(respoData!=null && respoData.results!=null &&respoData.results!.length>0))
+    print('object  :  girlDressRespo');
     girlDressRespo.value = ApiResponse.loading();
+    print('object  :  girlDressRespo125');
     final data = await _homeRepo.searchPhoto(req: req);
+    print('object  :  girlDressRespo129');
     girlDressRespo.value = data;
   }
 }
