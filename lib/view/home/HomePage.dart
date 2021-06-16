@@ -32,42 +32,43 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     // _homeController.photoOrder();
-    return Obx(() => Scaffold(
+    return Scaffold(
         bottomNavigationBar: getBottomBar(),
         backgroundColor: ColorConst.WHITE_COLOR,
         // body: showBottomItem()
-        body: createUi()));
+        body: createUi());
   }
 
   Widget createUi() {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: <Widget>[
         toobar(),
         SliverList(
             delegate: SliverChildListDelegate(
           [
-            BannerImgItem(title: StrConst.TITLE_TECHNOLOGY),
-            SizedBox(height: 10),
-            CircleCategoryItem(title: StrConst.TITLE_COLOR),
-            SizedBox(height: 10),
-            CategoryTagItem(),
-            SizedBox(height: 10),
-            LargeSmallItem(title: StrConst.TITLE_POPULAR),
-            SizedBox(height: 10),
-            CategoryWithImgItem(),
-            SizedBox(height: 10),
-            HorizontalListItem(title: StrConst.TITLE_GIRLS),
-            SizedBox(height: 10),
-            GridItem(title: StrConst.TITLE_NATURE),
-            SizedBox(height: 10),
+            // BannerImgItem(title: StrConst.TITLE_TECHNOLOGY),
+            // SizedBox(height: 10),
+            // CircleCategoryItem(title: StrConst.TITLE_COLOR),
+            // SizedBox(height: 10),
+            // CategoryTagItem(),
+            // SizedBox(height: 10),
+            // LargeSmallItem(title: StrConst.TITLE_POPULAR),
+            // SizedBox(height: 10),
+            // CategoryWithImgItem(),
+            // SizedBox(height: 10),
+            // HorizontalListItem(title: StrConst.TITLE_GIRLS),
+            // SizedBox(height: 10),
+            // GridItem(title: StrConst.TITLE_NATURE),
+            // SizedBox(height: 10),
             HorizontalListItem(title: StrConst.TITLE_GIRLS_DRESS),
-            SizedBox(height: 10),
-            HorizontalListItem(title: StrConst.TITLE_CAR),
-            SizedBox(height: 10),
-            CircleCategoryItem(title: StrConst.TITLE_LIFESTYLE),
-            SizedBox(height: 10),
-            HorizontalListItem(title: StrConst.TITLE_ROBOTIC),
-            SizedBox(height: 80),
+            // SizedBox(height: 10),
+            // HorizontalListItem(title: StrConst.TITLE_CAR),
+            // SizedBox(height: 10),
+            // CircleCategoryItem(title: StrConst.TITLE_LIFESTYLE),
+            // SizedBox(height: 10),
+            // HorizontalListItem(title: StrConst.TITLE_ROBOTIC),
+            // SizedBox(height: 80),
           ],
         ))
       ],
