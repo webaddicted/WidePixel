@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:alice/alice.dart';
+
+// import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
 import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
@@ -9,10 +10,10 @@ import 'package:wallpaper/utils/constant/StrConst.dart';
 /// Helper class for configuring Api calls
 class ApiBaseHelper {
   Dio? _dio;
-  Alice? alice;
+  // Alice? alice;
 
   ApiBaseHelper() {
-    alice = Alice(showNotification: true);
+    // alice = Alice(showNotification: true);
     var options = BaseOptions(
         receiveTimeout: ApiConstant.TIMEOUT,
         connectTimeout: ApiConstant.TIMEOUT);
@@ -28,7 +29,7 @@ class ApiBaseHelper {
     // _dio.options.headers['content-Type'] = 'application/json';
     // _dio.options.headers["authorization"] = "token ${token}";
     _dio!.interceptors.add(LogInterceptor());
-    _dio!.interceptors.add(alice!.getDioInterceptor()); //displays logs in notification view
+    // _dio!.interceptors.add(alice!.getDioInterceptor()); //displays logs in notification view
   }
 
   /// Method : GET
