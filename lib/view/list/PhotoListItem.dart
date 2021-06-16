@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/data/bean/SearchPhotoRespo.dart';
+import 'package:wallpaper/data/bean/search/SearchPicReq.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/api_response.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
@@ -23,7 +24,7 @@ class PhotoListItem extends StatelessWidget {
   HomeController _homeController = Get.find();
   var data = colorCategoryBean();
   int currentPage = 1;
-  int total_pages = 1;
+  int totalPages = 1;
   List<Results> results = [];
   ScrollController _scrollController = new ScrollController();
 
@@ -37,8 +38,7 @@ class PhotoListItem extends StatelessWidget {
       if (_scrollController.position.pixels > 0 &&
           _scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent) {
-        if (currentPage <= total_pages) callApi();
-        // callMovieApi(apiName, model, movieId: movieId, page: pageSize);
+        if (currentPage <= totalPages) callApi();
       }
     });
     callApi();
@@ -46,7 +46,7 @@ class PhotoListItem extends StatelessWidget {
       var respo = _homeController.searchPhotoRespo.value;
       if (respo.status == ApiStatus.COMPLETED) {
         currentPage++;
-        total_pages = respo.data!.totalPages!;
+        totalPages = respo.data!.totalPages!;
         results.addAll(respo.data!.results!);
         // results = respo.data?.results;
         return results != null && results.length > 0
@@ -55,99 +55,47 @@ class PhotoListItem extends StatelessWidget {
       } else
         return apiHandler(response: respo);
     });
-
-    // return results == null
-    //     ? getStaggered(
-    //         height: 280,
-    //         crossAxisCount: 2,
-    //         itemCount: data.length,
-    //         widget: (context, index) {
-    //           var item = data[index];
-    //           return Container(
-    //             margin: EdgeInsets.all(2),
-    //             child: ClipRRect(
-    //               child: Stack(
-    //                 children: [
-    //                   getCacheImage(url: item.url),
-    //                   Positioned.fill(
-    //                       child: Material(
-    //                           color: Colors.transparent,
-    //                           child: InkWell(
-    //                               splashColor: ColorConst.SPLASH_COLOR,
-    //                               onTap: () =>
-    //                                   Get.toNamed(RoutersConst.detail)))),
-    //                 ],
-    //               ),
-    //               borderRadius: BorderRadius.circular(5),
-    //             ),
-    //           );
-    //         })
-    //     : getStaggered(
-    //         height: 280,
-    //         crossAxisCount: 2,
-    //         itemCount: results!.length,
-    //         widget: (context, index) {
-    //           var item = results![index];
-    //           return Container(
-    //             margin: EdgeInsets.all(2),
-    //             child: ClipRRect(
-    //               child: Stack(
-    //                 children: [
-    //                   getCacheImage(url: item.urls!.regular.toString()),
-    //                   Positioned.fill(
-    //                       child: Material(
-    //                           color: Colors.transparent,
-    //                           child: InkWell(
-    //                               splashColor: ColorConst.SPLASH_COLOR,
-    //                               onTap: () =>
-    //                                   Get.toNamed(RoutersConst.detail)))),
-    //                 ],
-    //               ),
-    //               borderRadius: BorderRadius.circular(5),
-    //             ),
-    //           );
-    //         });
   }
 
   Widget getList() {
-    return getStaggered(
-        height: 280,
-        crossAxisCount: 2,
-        itemCount: results.length,
-        controller: _scrollController,
-        widget: (context, index) {
-          var item = results[index];
-          return Container(
-            margin: EdgeInsets.all(2),
-            child: ClipRRect(
-              child: Stack(
-                children: [
-                  getCacheImage(url: item.urls!.small.toString()),
-                  Positioned.fill(
-                      child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                              splashColor: ColorConst.SPLASH_COLOR,
-                              onTap: () => Get.toNamed(RoutersConst.detail)))),
-                ],
+    return Scrollbar(
+      controller: ScrollController(),
+      child: getStaggered(
+          height: 280,
+          crossAxisCount: 2,
+          itemCount: results.length,
+          controller: _scrollController,
+          widget: (context, index) {
+            var item = results[index];
+            return Container(
+              margin: EdgeInsets.all(2),
+              child: ClipRRect(
+                child: Stack(
+                  children: [
+                    getCacheImage(url: item.urls!.small.toString()),
+                    Positioned.fill(
+                        child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                                splashColor: ColorConst.SPLASH_COLOR,
+                                onTap: () => Get.toNamed(RoutersConst.detail)))),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(5),
               ),
-              borderRadius: BorderRadius.circular(5),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 
   void callApi() {
+    SearchPicReq req = SearchPicReq(query: query, page: currentPage);
     if (apiName == ApiConstant.SEARCH_PHOTOS) {
       _homeController.searchPic(
-          query: query!,
-          currentPage: currentPage,
-          isFreshCall: results.length > 0 ? false : true);
+          req: req, isFreshCall: results.length > 0 ? false : true);
     } else {
       _homeController.searchPic(
-          query: query!,
-          currentPage: currentPage,
-          isFreshCall: results.length > 0 ? false : true);
+          req: req, isFreshCall: results.length > 0 ? false : true);
     }
   }
 }
