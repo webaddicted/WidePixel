@@ -32,4 +32,8 @@ class StrConst {
   static var TITLE_ROBOTIC = 'Robot';
   static var TITLE_GIRLS_DRESS = 'Girls Dress';
   static var TITLE_TECHNOLOGY = 'Technology';
+  static var TITLE_POPULAR = 'Popular';
+  static var TITLE_COLOR = 'Color';
+  static var TITLE_MOVIE = 'Movie';
+  static var TITLE_LIFESTYLE = 'Lifestyle';
 }
