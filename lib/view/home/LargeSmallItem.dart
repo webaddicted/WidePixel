@@ -12,7 +12,7 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class LargeSmallItem extends StatelessWidget {
+class LargeSmallItem extends GetView<HomeController> {
   String title;
 
   List<PhotoOrderRespo> data = [];
@@ -28,7 +28,12 @@ class LargeSmallItem extends StatelessWidget {
     callApi();
     return Column(
       children: [
-        getHeading(title: title, onClick: (String title) {}),
+        getHeading(
+            title: title,
+            onClick: (String title) =>
+                Get.toNamed(RoutersConst.list, arguments: [title])
+        ),
+
         Obx(() {
           var respo = _homeController.img3ComboRespo.value;
           if (respo.status == ApiStatus.COMPLETED) {
@@ -54,7 +59,7 @@ class LargeSmallItem extends StatelessWidget {
       child: Row(
         children: [
           InkWell(
-              onTap: () => Get.toNamed(RoutersConst.list),
+              onTap: () => Get.toNamed(RoutersConst.detail),
               child: getCacheImage(
                   url: data[0].urls!.regular!,
                   height: height,
@@ -63,7 +68,7 @@ class LargeSmallItem extends StatelessWidget {
           Column(
             children: [
               InkWell(
-                onTap: () => Get.toNamed(RoutersConst.list),
+                onTap: () => Get.toNamed(RoutersConst.detail),
                 child: getCacheImage(
                     url: data[1].urls!.regular!,
                     height: (height / 2) - 2,
@@ -71,7 +76,7 @@ class LargeSmallItem extends StatelessWidget {
               ),
               SizedBox(height: 3),
               InkWell(
-                onTap: () => Get.toNamed(RoutersConst.list),
+                onTap: () => Get.toNamed(RoutersConst.detail),
                 child: getCacheImage(
                     url: data[3].urls!.regular!,
                     height: (height / 2) - 2,
