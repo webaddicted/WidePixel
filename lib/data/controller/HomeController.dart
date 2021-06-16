@@ -81,7 +81,9 @@ class HomeController extends GetxController {
     movieRespo.value = data;
   }
   girlDressPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    if (isFreshCall) girlDressRespo.value = ApiResponse.loading();
+    // var data = girlDressRespo.value.data;
+    // if(data!=null && data.results!=null &&data.results!.length>0)
+    girlDressRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     girlDressRespo.value = data;
   }
