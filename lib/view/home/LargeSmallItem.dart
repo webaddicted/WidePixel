@@ -13,11 +13,11 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 /// Profile : https://github.com/webaddicted
 
 class LargeSmallItem extends StatelessWidget {
-  String heigthWidth;
+  String title;
 
   List<PhotoOrderRespo> data = [];
 
-  LargeSmallItem(this.heigthWidth);
+  LargeSmallItem({required this.title});
 
   HomeController _homeController = Get.find();
 
@@ -28,7 +28,7 @@ class LargeSmallItem extends StatelessWidget {
     callApi();
     return Column(
       children: [
-        getHeading(title: heigthWidth, onClick: (String title) {}),
+        getHeading(title: title, onClick: (String title) {}),
         Obx(() {
           var respo = _homeController.img3ComboRespo.value;
           if (respo.status == ApiStatus.COMPLETED) {
