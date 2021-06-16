@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:wallpaper/data/bean/SearchPhotoRespo.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
-import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/view/list/PhotoListItem.dart';
 
 class SearchItem extends SearchDelegate<int> {
@@ -58,8 +57,7 @@ class SearchItem extends SearchDelegate<int> {
   Widget buildResults(BuildContext context) {
     // _homeController.searchPic(query: query, currentPage: 1);
     return PhotoListItem(
-      apiName: ApiConstant.SEARCH_PHOTOS,
-      query: query,
+      title: query,
     );
 
     // return Obx(() => PhotoListItem('Nature'));
