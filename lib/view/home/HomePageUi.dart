@@ -12,7 +12,7 @@ import 'package:wallpaper/utils/constant/StrConst.dart';
 import 'package:wallpaper/view/home/BannerImgItem.dart';
 import 'package:wallpaper/view/home/CircleCategoryItem.dart';
 import 'package:wallpaper/view/home/GridItem.dart';
-import 'package:wallpaper/view/home/HomeCategoryItem.dart';
+import 'package:wallpaper/view/home/HorizontalListItem.dart';
 import 'package:wallpaper/view/home/LargeSmallItem.dart';
 import 'package:wallpaper/view/search/SearchPage.dart';
 
@@ -33,25 +33,25 @@ class HomePageUi extends StatelessWidget {
         SliverList(
             delegate: SliverChildListDelegate(
               [
-                CircleCategoryItem(ApiConstant.Circle_Color_50),
-                SizedBox(height: 10),
-                categoryTag(),
-                SizedBox(height: 10),
-                LargeSmallItem(ApiConstant.Rect_100_15),
-                SizedBox(height: 10),
-                categoryWithImg(),
-                SizedBox(height: 10),
-                GridItem(ApiConstant.Rect_220_155),
-                SizedBox(height: 10),
-                HomeCategoryItem(ApiConstant.Rect_220_155),
-                SizedBox(height: 10),
-                CircleCategoryItem(ApiConstant.Circle_100),
-                SizedBox(height: 10),
-                HomeCategoryItem(ApiConstant.Rect_100_15),
-                SizedBox(height: 10),
-                HomeCategoryItem(ApiConstant.Rect_320_15),
-                SizedBox(height: 10),
-                BannerImgItem(ApiConstant.Rect_320_15)
+                // CircleCategoryItem(apiName: ApiConstant.Circle_Color_50),
+                // SizedBox(height: 10),
+                // categoryTag(),
+                // SizedBox(height: 10),
+                // LargeSmallItem(ApiConstant.Rect_100_15),
+                // SizedBox(height: 10),
+                // categoryWithImg(),
+                // SizedBox(height: 10),
+                // GridItem(ApiConstant.Rect_220_155),
+                // SizedBox(height: 10),
+                // HomeCategoryItem(ApiConstant.Rect_220_155),
+                // SizedBox(height: 10),
+                // CircleCategoryItem(apiName: ApiConstant.Circle_100),
+                // SizedBox(height: 10),
+                // HomeCategoryItem(ApiConstant.Rect_100_15),
+                // SizedBox(height: 10),
+                // HomeCategoryItem(ApiConstant.Rect_320_15),
+                // SizedBox(height: 10),
+                // BannerImgItem(ApiConstant.Rect_320_15)
               ],
             ))
       ],
@@ -94,7 +94,7 @@ class HomePageUi extends StatelessWidget {
               color: ColorConst.BLACK_COLOR,
             ),
             onPressed: () {
-              _homeController.photoOrder();
+              // _homeController.photoOrder();
             }),
       ],
       elevation: 50,
