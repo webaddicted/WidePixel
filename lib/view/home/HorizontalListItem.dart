@@ -5,7 +5,6 @@ import 'package:wallpaper/data/bean/search/SearchPicReq.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/api_response.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
-import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
@@ -14,13 +13,11 @@ import 'package:wallpaper/utils/constant/StrConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class HorizontalListItem extends StatelessWidget {
-  String title;
-
-  List<Results>? data = [];
-
+class HorizontalListItem extends GetView<HomeController> {
   HorizontalListItem({required this.title});
 
+  String title;
+  List<Results>? data = [];
   HomeController _homeController = Get.find();
   double height = 220;
   double width = 155;
@@ -41,7 +38,10 @@ class HorizontalListItem extends StatelessWidget {
     callApi();
     return Column(
       children: [
-        getHeading(title: title, onClick: (String title) {}),
+        getHeading(
+            title: title,
+            onClick: (String title) =>
+                Get.toNamed(RoutersConst.list, arguments: [title])),
         Obx(() {
           ApiResponse<SearchPhotoRespo?> respo = getRespo();
           if (respo.status == ApiStatus.COMPLETED) {
@@ -67,7 +67,7 @@ class HorizontalListItem extends StatelessWidget {
             index: index,
             height: height,
             width: width,
-            onClick: () => Get.toNamed(RoutersConst.list)));
+            onClick: () => Get.toNamed(RoutersConst.detail)));
   }
 
   Widget getView(
@@ -101,7 +101,7 @@ class HorizontalListItem extends StatelessWidget {
     if (title == StrConst.TITLE_GIRLS_DRESS) {
       _homeController.girlDressPic(
           req: SearchPicReq(query: title, page: 1), isFreshCall: false);
-    }else if (title == StrConst.TITLE_GIRLS_DRESS) {
+    } else if (title == StrConst.TITLE_GIRLS) {
       _homeController.girlPic(
           req: SearchPicReq(query: title, page: 1), isFreshCall: false);
     } else if (title == StrConst.TITLE_CAR) {
@@ -119,13 +119,14 @@ class HorizontalListItem extends StatelessWidget {
   getRespo() {
     if (title == StrConst.TITLE_GIRLS_DRESS) {
       return _homeController.girlDressRespo.value;
-    }else if (title == StrConst.TITLE_GIRLS) {
+    } else if (title == StrConst.TITLE_GIRLS) {
       return _homeController.girlRespo.value;
     } else if (title == StrConst.TITLE_CAR) {
       return _homeController.carRespo.value;
     } else if (title == StrConst.TITLE_ROBOTIC) {
       return _homeController.robotRespo.value;
     } else {
+      return _homeController.girlRespo.value;
       _homeController.girlPic(
           req: SearchPicReq(query: title, page: 1), isFreshCall: false);
     }
