@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
-import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DimenSize.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
@@ -23,18 +22,9 @@ class HomePage extends GetView<HomeController> {
   final _selectedIndex = 0.obs;
   static List<Widget> _widgetOptions = <Widget>[
     // GridItem(ApiConstant.Rect_220_155),
-    PhotoListItem(
-      apiName: ApiConstant.SEARCH_PHOTOS,
-      query: 'Nature',
-    ),
-    PhotoListItem(
-      apiName: ApiConstant.SEARCH_PHOTOS,
-      query: 'Animal',
-    ),
-    PhotoListItem(
-      apiName: ApiConstant.SEARCH_PHOTOS,
-      query: 'Life',
-    ),
+    PhotoListItem(title: 'Nature'),
+    PhotoListItem(title: 'Animal'),
+    PhotoListItem(title: 'Life'),
     ProfilePage(),
   ];
   HomeController _homeController = Get.find();
@@ -54,11 +44,9 @@ class HomePage extends GetView<HomeController> {
       slivers: <Widget>[
         toobar(),
         SliverList(
-
             delegate: SliverChildListDelegate(
-
           [
-            BannerImgItem(title:StrConst.TITLE_TECHNOLOGY),
+            BannerImgItem(title: StrConst.TITLE_TECHNOLOGY),
             SizedBox(height: 10),
             CircleCategoryItem(title: StrConst.TITLE_COLOR),
             SizedBox(height: 10),
@@ -74,13 +62,12 @@ class HomePage extends GetView<HomeController> {
             SizedBox(height: 10),
             HorizontalListItem(title: StrConst.TITLE_GIRLS_DRESS),
             SizedBox(height: 10),
-            HorizontalListItem(title :StrConst.TITLE_CAR),
+            HorizontalListItem(title: StrConst.TITLE_CAR),
             SizedBox(height: 10),
             CircleCategoryItem(title: StrConst.TITLE_LIFESTYLE),
             SizedBox(height: 10),
-            HorizontalListItem(title :StrConst.TITLE_ROBOTIC),
+            HorizontalListItem(title: StrConst.TITLE_ROBOTIC),
             SizedBox(height: 80),
-
           ],
         ))
       ],
