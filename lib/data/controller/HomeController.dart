@@ -20,6 +20,8 @@ class HomeController extends GetxController {
   final robotRespo = (ApiResponse<SearchPhotoRespo?>()).obs;
   final girlDressRespo = (ApiResponse<SearchPhotoRespo?>()).obs;
   final technologyRespo = (ApiResponse<SearchPhotoRespo?>()).obs;
+  final movieRespo = (ApiResponse<SearchPhotoRespo?>()).obs;
+  final lifeStyleRespo = (ApiResponse<SearchPhotoRespo?>()).obs;
 
   img3Combo({required SearchPicReq req, bool isFreshCall = true}) async {
     if (isFreshCall) img3ComboRespo.value = ApiResponse.loading();
@@ -67,6 +69,16 @@ class HomeController extends GetxController {
     if (isFreshCall) technologyRespo.value = ApiResponse.loading();
     final data = await _homeRepo.searchPhoto(req: req);
     technologyRespo.value = data;
+  }
+  lifeStylePic({required SearchPicReq req, bool isFreshCall = true}) async {
+    if (isFreshCall) lifeStyleRespo.value = ApiResponse.loading();
+    final data = await _homeRepo.searchPhoto(req: req);
+    lifeStyleRespo.value = data;
+  }
+  moviePic({required SearchPicReq req, bool isFreshCall = true}) async {
+    if (isFreshCall) movieRespo.value = ApiResponse.loading();
+    final data = await _homeRepo.searchPhoto(req: req);
+    movieRespo.value = data;
   }
   girlDressPic({required SearchPicReq req, bool isFreshCall = true}) async {
     if (isFreshCall) girlDressRespo.value = ApiResponse.loading();
