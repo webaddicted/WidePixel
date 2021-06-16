@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:alice/alice.dart';
+// import 'package:alice/alice.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -11,7 +11,7 @@ import 'package:wallpaper/utils/constant/ApiConstant.dart';
 
 class ApiBaseHelper {
   static final String url = 'BASE_URL';
-  static Alice alice = Alice(showNotification: true);
+  // static Alice alice = Alice(showNotification: true);
   static BaseOptions opts = BaseOptions(
     baseUrl: ApiConstant.BASE_URL,
     responseType: ResponseType.json,
@@ -26,7 +26,7 @@ class ApiBaseHelper {
 
   static Dio addInterceptors(Dio dio) {
     dio.interceptors.add(LogInterceptor(responseBody: true,request: true, requestBody: true,requestHeader: true));
-    dio.interceptors.add(alice.getDioInterceptor()); //displays logs in notification view
+    // dio.interceptors.add(alice.getDioInterceptor()); //displays logs in notification view
 return dio;
     // return dio
     //   ..interceptors.add(
