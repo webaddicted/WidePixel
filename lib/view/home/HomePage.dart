@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wallpaper/data/bean/CategoryBean.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DimenSize.dart';
-import 'package:wallpaper/utils/constant/DummyData.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
 import 'package:wallpaper/view/home/BannerImgItem.dart';
+import 'package:wallpaper/view/home/CategoryTagItem.dart';
+import 'package:wallpaper/view/home/CategoryWithImgItem.dart';
 import 'package:wallpaper/view/home/CircleCategoryItem.dart';
 import 'package:wallpaper/view/home/GridItem.dart';
-import 'package:wallpaper/view/home/HomeCategoryItem.dart';
+import 'package:wallpaper/view/home/HorizontalListItem.dart';
 import 'package:wallpaper/view/home/LargeSmallItem.dart';
 import 'package:wallpaper/view/list/PhotoListItem.dart';
 import 'package:wallpaper/view/profile/ProfilePage.dart';
@@ -22,7 +22,7 @@ import 'package:wallpaper/view/search/SearchPage.dart';
 class HomePage extends GetView<HomeController> {
   final _selectedIndex = 0.obs;
   static List<Widget> _widgetOptions = <Widget>[
-    GridItem(ApiConstant.Rect_220_155),
+    // GridItem(ApiConstant.Rect_220_155),
     PhotoListItem(
       apiName: ApiConstant.SEARCH_PHOTOS,
       query: 'Nature',
@@ -41,7 +41,7 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    _homeController.photoOrder();
+    // _homeController.photoOrder();
     return Obx(() => Scaffold(
         bottomNavigationBar: getBottomBar(),
         backgroundColor: ColorConst.WHITE_COLOR,
@@ -56,25 +56,29 @@ class HomePage extends GetView<HomeController> {
         SliverList(
             delegate: SliverChildListDelegate(
           [
-            CircleCategoryItem(ApiConstant.Circle_Color_50),
+            BannerImgItem(title:StrConst.TITLE_TECHNOLOGY),
             SizedBox(height: 10),
-            categoryTag(),
+            CircleCategoryItem(apiName: ApiConstant.COLOR_IMAGE),
+            SizedBox(height: 10),
+            CategoryTagItem(),
             SizedBox(height: 10),
             LargeSmallItem(ApiConstant.Rect_100_15),
             SizedBox(height: 10),
-            categoryWithImg(),
+            CategoryWithImgItem(),
             SizedBox(height: 10),
-            GridItem(ApiConstant.Rect_220_155),
+            HorizontalListItem(title: StrConst.TITLE_GIRLS_DRESS),
             SizedBox(height: 10),
-            HomeCategoryItem(ApiConstant.Rect_220_155),
+            GridItem(title: StrConst.TITLE_NATURE),
             SizedBox(height: 10),
-            CircleCategoryItem(ApiConstant.Circle_100),
+            HorizontalListItem(title: StrConst.TITLE_GIRLS),
             SizedBox(height: 10),
-            HomeCategoryItem(ApiConstant.Rect_100_15),
+            HorizontalListItem(title :StrConst.TITLE_CAR),
             SizedBox(height: 10),
-            HomeCategoryItem(ApiConstant.Rect_320_15),
+            CircleCategoryItem(apiName: ApiConstant.Circle_100),
             SizedBox(height: 10),
-            BannerImgItem(ApiConstant.Rect_320_15)
+            HorizontalListItem(title :StrConst.TITLE_ROBOTIC),
+            SizedBox(height: 10),
+
           ],
         ))
       ],
@@ -118,7 +122,7 @@ class HomePage extends GetView<HomeController> {
               color: ColorConst.BLACK_COLOR,
             ),
             onPressed: () {
-              _homeController.photoOrder();
+              // _homeController.photoOrder();
             }),
       ],
       elevation: 50,
@@ -132,76 +136,6 @@ class HomePage extends GetView<HomeController> {
         ),
       ),
     );
-  }
-
-  Widget categoryTag() {
-    return Container(
-        margin: EdgeInsets.only(left: 5),
-        child: getList(
-            height: 60,
-            itemCount: categoryBean().length,
-            widget: (context, index) {
-              CategoryBean item = categoryBean()[index];
-              return InkWell(
-                onTap: () => Get.toNamed(RoutersConst.list),
-                child: Container(
-                  padding: EdgeInsets.only(top: 5, bottom: 5),
-                  child: Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Center(
-                      child: Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          child: getTxtBlackColor(msg: '${item.name}')),
-                    ),
-                  ),
-                ),
-              );
-            }));
-  }
-
-  Widget categoryWithImg() {
-    return getList(
-        height: 60,
-        itemCount: categoryBean().length,
-        widget: (context, index) {
-          CategoryBean item = categoryBean()[index];
-          return InkWell(
-            onTap: () => Get.toNamed(RoutersConst.list),
-            child: Container(
-              margin: EdgeInsets.only(right: 8, left: 8),
-              child: Stack(
-                children: <Widget>[
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: getCacheImage(
-                          url: item.url,
-                          height: 50,
-                          width: 100,
-                          fit: BoxFit.cover)),
-                  Container(
-                    height: 50,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.black26,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  Container(
-                      height: 50,
-                      width: 100,
-                      alignment: Alignment.center,
-                      child: getTxtWhiteColor(
-                        msg: item.name ?? "Yo Yo",
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                      ))
-                ],
-              ),
-            ),
-          );
-        });
   }
 
   Widget getBottomBar() {
