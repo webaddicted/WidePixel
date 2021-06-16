@@ -16,7 +16,7 @@ import 'package:wallpaper/utils/constant/StrConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class CircleCategoryItem extends GetView<HomeController> {
+class CircleCategoryItem extends StatelessWidget {
   String title = '';
 
   CircleCategoryItem({required this.title});
