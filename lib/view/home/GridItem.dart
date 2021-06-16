@@ -13,7 +13,7 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class GridItem extends GetView<HomeController> {
+class GridItem extends StatelessWidget {
   String title = '';
 
   GridItem({required this.title});
