@@ -1,49 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/data/bean/CategoryBean.dart';
+import 'package:wallpaper/data/bean/SearchPhotoRespo.dart';
+import 'package:wallpaper/data/bean/search/SearchPicReq.dart';
+import 'package:wallpaper/data/controller/HomeController.dart';
+import 'package:wallpaper/utils/api_response.dart';
 import 'package:wallpaper/utils/common/GlobalUtilities.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
-import 'package:wallpaper/utils/constant/ApiConstant.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
+import 'package:wallpaper/utils/constant/StrConst.dart';
 
 /// Author : Deepak Sharma(Webaddicted)
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
 class CircleCategoryItem extends StatelessWidget {
-  String apiName;
-  String title;
+  String title = '';
 
-  CircleCategoryItem({this.title = '', this.apiName = ''});
-  var data = categoryBean();
+  CircleCategoryItem({required this.title});
+
+  HomeController _homeController = Get.find();
+  double height = 100;
+  double width = 100;
+  var data = [];
+
   @override
   Widget build(BuildContext context) {
-    double height = 100;
-    double width = 100;
-    if (apiName == ApiConstant.Circle_Color_50) {
-      height = 100;
-      width = 100;
-      data = categoryBean();
-    } else if (apiName == ApiConstant.COLOR_IMAGE) {
+    if (title == StrConst.TITLE_COLOR) {
       height = 50;
       width = 50;
-      data = colorCategoryBean();
+    } else {
+      height = 100;
+      width = 100;
     }
-    return Column(
-      children: [
-        getHeading(title: apiName, onClick: (String title) {}),
-        getList(
-            height: height,
-            itemCount: data.length,
-            widget: (context, index) => getView(
-                index: index,
-                height: height,
-                width: width,
-                onClick: () => Get.toNamed(RoutersConst.list))),
-      ],
-    );
+    callApi();
+    return getListView();
+  }
+
+  Widget getListView() {
+    if (title == StrConst.TITLE_COLOR) {
+      return Column(
+        children: [
+          getList(
+              height: height,
+              itemCount: data.length,
+              widget: (context, index) => getView(
+                  index: index,
+                  height: height,
+                  width: width,
+                  onClick: () => Get.toNamed(RoutersConst.list))),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          getHeading(title: title, onClick: (String title) {}),
+          Obx(() {
+            ApiResponse<SearchPhotoRespo?> respo =
+                _homeController.lifeStyleRespo.value;
+            if (respo.status == ApiStatus.COMPLETED) {
+              data = respo.data!.results!;
+              return data.length > 0
+                  ? getList(
+                      height: height,
+                      itemCount: data.length,
+                      widget: (context, index) => getView(
+                          index: index,
+                          height: height,
+                          width: width,
+                          onClick: () => Get.toNamed(RoutersConst.list)))
+                  : noDataFound();
+            } else
+              return apiHandler(response: respo);
+          })
+        ],
+      );
+    }
   }
 
   Widget getView(
@@ -51,21 +85,26 @@ class CircleCategoryItem extends StatelessWidget {
       double height = 50,
       double width = 50,
       Function? onClick}) {
-    CategoryBean item = data[index];
+    var item;
+    if (title == StrConst.TITLE_COLOR) {
+      item = data[index] as CategoryBean;
+    } else {
+      item = data[index] as Results;
+    }
     return Container(
         margin: EdgeInsets.only(left: 5, right: 5),
         child: ClipRRect(
           child: Stack(
             children: [
-              if (apiName == ApiConstant.COLOR_IMAGE)
+              if (title == StrConst.TITLE_COLOR)
                 getCacheImage(
-                    colorPath: colorFromHex(item.color!),
+                    colorPath: colorFromHex(item!.color!),
                     isCircle: true,
                     height: height,
                     width: width),
-              if (apiName == ApiConstant.Circle_100)
+              if (title != StrConst.TITLE_COLOR)
                 getCacheImage(
-                    url: item.url,
+                    url: item!.urls!.regular!,
                     isCircle: true,
                     height: height,
                     width: width),
@@ -80,5 +119,13 @@ class CircleCategoryItem extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  void callApi() {
+    if (title == StrConst.TITLE_COLOR) {
+      data = colorCategoryBean();
+    } else {
+      _homeController.lifeStylePic(req: SearchPicReq(query: title, page: 1));
+    }
   }
 }
