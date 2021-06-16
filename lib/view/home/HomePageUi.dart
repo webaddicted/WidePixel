@@ -119,7 +119,7 @@ class HomePageUi extends StatelessWidget {
             widget: (context, index) {
               CategoryBean item = categoryBean()[index];
               return InkWell(
-                onTap: () => Get.toNamed(RoutersConst.list),
+                // onTap: () => Get.toNamed(RoutersConst.list),
                 child: Container(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
                   child: Card(
