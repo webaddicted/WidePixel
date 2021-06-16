@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper/data/bean/PhotoOrderRespo.dart';
+import 'package:wallpaper/data/bean/search/SearchPicReq.dart';
+import 'package:wallpaper/data/controller/HomeController.dart';
+import 'package:wallpaper/utils/api_response.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
-import 'package:wallpaper/utils/constant/DummyData.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
 
 /// Author : Deepak Sharma(Webaddicted)
@@ -12,18 +15,34 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 class LargeSmallItem extends StatelessWidget {
   String heigthWidth;
 
+  List<PhotoOrderRespo> data = [];
+
   LargeSmallItem(this.heigthWidth);
 
-  var data = colorCategoryBean();
+  HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     double height = 350;
     double width = Get.width - 15;
+    callApi();
     return Column(
       children: [
         getHeading(title: heigthWidth, onClick: (String title) {}),
-        getView(height, width)
+        Obx(() {
+          var respo = _homeController.img3ComboRespo.value;
+          if (respo.status == ApiStatus.COMPLETED) {
+            // currentPage++;
+            data = respo.data!;
+            // results.addAll(respo.data!.results!);
+            // results = respo.data?.results;
+            return data != null && data.length > 0
+                ? getView(height, width)
+                : noDataFound();
+          } else
+            return apiHandler(response: respo);
+        })
+        // getView(height, width)
       ],
     );
   }
@@ -37,14 +56,16 @@ class LargeSmallItem extends StatelessWidget {
           InkWell(
               onTap: () => Get.toNamed(RoutersConst.list),
               child: getCacheImage(
-                  url: data[5].url, height: height, width: width / 2)),
+                  url: data[0].urls!.regular!,
+                  height: height,
+                  width: width / 2)),
           SizedBox(width: 3),
           Column(
             children: [
               InkWell(
                 onTap: () => Get.toNamed(RoutersConst.list),
                 child: getCacheImage(
-                    url: data[1].url,
+                    url: data[1].urls!.regular!,
                     height: (height / 2) - 2,
                     width: width / 2),
               ),
@@ -52,7 +73,7 @@ class LargeSmallItem extends StatelessWidget {
               InkWell(
                 onTap: () => Get.toNamed(RoutersConst.list),
                 child: getCacheImage(
-                    url: data[3].url,
+                    url: data[3].urls!.regular!,
                     height: (height / 2) - 2,
                     width: width / 2),
               ),
@@ -66,5 +87,10 @@ class LargeSmallItem extends StatelessWidget {
       //         child: InkWell(
       //             splashColor: ColorConst.SPLASH_COLOR, onTap: () {}))),
     );
+  }
+
+  void callApi() {
+    // SearchPicReq req = SearchPicReq(page: 1);/**/
+    _homeController.img3Combo(req: SearchPicReq(page: 1), isFreshCall: false);
   }
 }
