@@ -9,12 +9,13 @@ import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
 import 'package:wallpaper/utils/constant/DummyData.dart';
 import 'package:wallpaper/utils/constant/RoutersConst.dart';
+import 'package:wallpaper/utils/constant/StrConst.dart';
 
 /// Author : Deepak Sharma(Webaddicted)
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class BannerImgItem extends StatelessWidget {
+class BannerImgItem extends  GetView<HomeController> {
   String title;
   final _current = 0.obs;
 
@@ -81,7 +82,7 @@ class BannerImgItem extends StatelessWidget {
               itemIndex: itemIndex,
               realIndex: realIndex,
               onTap: () {
-                Get.toNamed(RoutersConst.list);
+                Get.toNamed(RoutersConst.list, arguments: [StrConst.TITLE_GIRLS_DRESS]);
               }),
     );
   }
