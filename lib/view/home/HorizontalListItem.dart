@@ -13,7 +13,7 @@ import 'package:wallpaper/utils/constant/StrConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class HorizontalListItem extends GetView<HomeController> {
+class HorizontalListItem extends StatelessWidget {
   HorizontalListItem({required this.title});
 
   String title;
