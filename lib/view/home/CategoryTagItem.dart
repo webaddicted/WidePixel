@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wallpaper/data/bean/CategoryBean.dart';
+import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/GlobalUtilities.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ApiConstant.dart';
@@ -12,7 +13,7 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 /// Email : deepaksharmatheboss@gmail.com
 /// Profile : https://github.com/webaddicted
 
-class CategoryTagItem extends StatelessWidget {
+class CategoryTagItem extends GetView<HomeController> {
   String apiName;
   String title;
 
@@ -42,7 +43,7 @@ class CategoryTagItem extends StatelessWidget {
             widget: (context, index) {
               CategoryBean item = categoryBean()[index];
               return InkWell(
-                onTap: () => Get.toNamed(RoutersConst.list),
+                onTap: () => Get.toNamed(RoutersConst.list, arguments: [item.name]),
                 child: Container(
                   padding: EdgeInsets.only(top: 5, bottom: 5),
                   child: Card(
