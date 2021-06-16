@@ -15,7 +15,7 @@ class ApiResponse<T> {
 
   /// loading
   static ApiResponse<T> loading<T>() {
-    return ApiResponse<T>(status: ApiStatus.LOADING, data: null);
+    return ApiResponse<T>(status: ApiStatus.LOADING);
   }
 
   /// success
