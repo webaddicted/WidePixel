@@ -39,6 +39,7 @@ class PhotoListItem extends StatelessWidget {
     });
     print('title 1 :  $title');
     callApi();
+    // return Container();
     return Obx(() {
       print('object');
       var respo;
