@@ -84,10 +84,15 @@ class HomeController extends GetxController {
     var respoData = girlDressRespo.value.data;
     // if(!(respoData!=null && respoData.results!=null &&respoData.results!.length>0))
     print('object  :  girlDressRespo');
-    girlDressRespo.value = ApiResponse.loading();
-    print('object  :  girlDressRespo125');
-    final data = await _homeRepo.searchPhoto(req: req);
-    print('object  :  girlDressRespo129');
-    girlDressRespo.value = data;
+    try {
+      girlDressRespo.value = ApiResponse.loading();
+    }catch(exp) {
+      print('${exp.toString()}');
+    }
+      print('object  :  girlDressRespo125');
+      final data = await _homeRepo.searchPhoto(req: req);
+      print('object  :  girlDressRespo129');
+      girlDressRespo.value = data;
+
   }
 }
