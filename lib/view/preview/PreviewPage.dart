@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:wallpaper/data/bean/SearchPhotoRespo.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
@@ -8,11 +9,13 @@ import 'package:wallpaper/utils/constant/DummyData.dart';
 
 class PreviewPage extends GetView<HomeController> {
   int index = 0;
-
+  String title = 'Nature';
+  Results? data;
   @override
   Widget build(BuildContext context) {
-    // var argu = Get.arguments;
-    // pageTitle = argu[0];
+    var argu = Get.arguments;
+    title = argu[0];
+    data = argu[1];
     return Scaffold(body: createUi());
   }
 
@@ -22,7 +25,7 @@ class PreviewPage extends GetView<HomeController> {
       children: [
         InkWell(
             splashColor: ColorConst.SPLASH_COLOR,
-            child: getCacheImage(url: categoryBean()[1].url, fit: BoxFit.fill)),
+            child: getCacheImage(url: data!.urls!.regular!, fit: BoxFit.fill)),
         toolbar(),
         Center(child: getTime())
       ],
