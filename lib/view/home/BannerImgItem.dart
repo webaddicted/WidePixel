@@ -82,7 +82,7 @@ class BannerImgItem extends  GetView<HomeController> {
               itemIndex: itemIndex,
               realIndex: realIndex,
               onTap: () {
-                Get.toNamed(RoutersConst.list, arguments: [StrConst.TITLE_GIRLS_DRESS]);
+                Get.toNamed(RoutersConst.detail, arguments: [title,data![itemIndex]]);
               }),
     );
   }
