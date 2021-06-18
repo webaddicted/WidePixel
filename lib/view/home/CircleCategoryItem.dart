@@ -77,7 +77,7 @@ class CircleCategoryItem extends StatelessWidget {
                           height: height,
                           width: width,
                           onClick: () {
-                            Get.toNamed(RoutersConst.detail);
+                            Get.toNamed(RoutersConst.detail, arguments: [title,data[index]]);
                           }))
                   : noDataFound();
             } else
