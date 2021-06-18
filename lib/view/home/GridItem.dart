@@ -31,8 +31,7 @@ class GridItem extends StatelessWidget {
         getHeading(
             title: title,
             onClick: (String title) =>
-                Get.toNamed(RoutersConst.list, arguments: [title])
-        ),
+                Get.toNamed(RoutersConst.list, arguments: [title])),
         Obx(() {
           var respo = _homeController.natureRespo.value;
           if (respo.status == ApiStatus.COMPLETED) {
@@ -56,7 +55,8 @@ class GridItem extends StatelessWidget {
         widget: (context, index) {
           Results item = data![index];
           return InkWell(
-            onTap: () => Get.toNamed(RoutersConst.list),
+            onTap: () =>
+                Get.toNamed(RoutersConst.detail, arguments: [title, item]),
             splashColor: ColorConst.SPLASH_COLOR,
             child: Container(
                 margin: EdgeInsets.all(2),
