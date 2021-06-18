@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:wallpaper/data/bean/SearchPhotoRespo.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ApiConstant.dart';
@@ -13,16 +14,20 @@ import 'package:wallpaper/utils/constant/RoutersConst.dart';
 import 'package:wallpaper/utils/constant/StrConst.dart';
 
 class DetailPage extends GetView<HomeController> {
-  String pageTitle = 'Nature';
+  String title = 'Nature';
   final GlobalKey<PopupMenuButtonState<int>> _key = GlobalKey();
   late PageController pageController;
   int index = 0;
+  Results? data;
 
   @override
   Widget build(BuildContext context) {
     pageController = PageController(initialPage: index);
-    // var argu = Get.arguments;
-    // pageTitle = argu[0];
+    var argu = Get.arguments;
+print('Details: $argu');
+    title = argu[0];
+    data = argu[1];
+
     return Scaffold(body: createUi());
   }
 
@@ -31,8 +36,8 @@ class DetailPage extends GetView<HomeController> {
         child: Stack(
       children: [
         InkWell(
-            onTap: () => Get.toNamed(RoutersConst.fullimage),
-            child: getCacheImage(url: categoryBean()[1].url, fit: BoxFit.fill)),
+            onTap: () => Get.toNamed(RoutersConst.fullimage, arguments: [title, data]),
+            child: getCacheImage(url: data!.urls!.regular!, fit: BoxFit.fill)),
         toolbar(),
         slidingUp()
       ],
@@ -57,7 +62,7 @@ class DetailPage extends GetView<HomeController> {
                   color: ColorConst.GREY_SHADE,
                 ),
                 onPressed: () {
-                  Get.toNamed(RoutersConst.preview);
+                  Get.toNamed(RoutersConst.preview, arguments: [title,data]);
                 }),
             PopupMenuButton<int>(
               // key: _key,
