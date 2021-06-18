@@ -24,75 +24,116 @@ class HomeController extends GetxController {
   final lifeStyleRespo = (ApiResponse<SearchPhotoRespo?>()).obs;
 
   img3Combo({required SearchPicReq req, bool isFreshCall = true}) async {
-    img3ComboRespo.value = ApiResponse.loading();
+    try {
+      img3ComboRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.photoOrder(req: req);
     img3ComboRespo.value = data;
   }
 
   photoOrder({required SearchPicReq req, bool isFreshCall = true}) async {
-    photoOrderRespo.value = ApiResponse.loading();
+    try {
+      photoOrderRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.photoOrder(req: req);
     photoOrderRespo.value = data;
   }
 
   searchPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    searchPhotoRespo.value = ApiResponse.loading();
+    try {
+      searchPhotoRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     searchPhotoRespo.value = data;
   }
 
   naturePic({required SearchPicReq req, bool isFreshCall = true}) async {
-    natureRespo.value = ApiResponse.loading();
+    try {
+      natureRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     natureRespo.value = data;
   }
 
   girlPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    girlRespo.value = ApiResponse.loading();
+    try {
+      girlRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     girlRespo.value = data;
   }
 
   carPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    carRespo.value = ApiResponse.loading();
+    try {
+      carRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     carRespo.value = data;
   }
 
   robotPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    robotRespo.value = ApiResponse.loading();
+    try {
+      robotRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     robotRespo.value = data;
   }
 
   technologyPic({required SearchPicReq req, bool isFreshCall = true}) async {
-    technologyRespo.value = ApiResponse.loading();
+    try {
+      technologyRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     technologyRespo.value = data;
   }
+
   lifeStylePic({required SearchPicReq req, bool isFreshCall = true}) async {
-    lifeStyleRespo.value = ApiResponse.loading();
+    try {
+      lifeStyleRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     lifeStyleRespo.value = data;
   }
+
   moviePic({required SearchPicReq req, bool isFreshCall = true}) async {
-    movieRespo.value = ApiResponse.loading();
+    try {
+      movieRespo.value = ApiResponse.loading();
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
+    }
     final data = await _homeRepo.searchPhoto(req: req);
     movieRespo.value = data;
   }
+
   girlDressPic({required SearchPicReq req, bool isFreshCall = true}) async {
     var respoData = girlDressRespo.value.data;
-    // if(!(respoData!=null && respoData.results!=null &&respoData.results!.length>0))
     print('object  :  girlDressRespo');
     try {
       girlDressRespo.value = ApiResponse.loading();
-    }catch(exp) {
-      print('${exp.toString()}');
+    } catch (exp) {
+      print('test error : ${exp.toString()}');
     }
-      print('object  :  girlDressRespo125');
-      final data = await _homeRepo.searchPhoto(req: req);
-      print('object  :  girlDressRespo129');
-      girlDressRespo.value = data;
-
+    print('object  :  girlDressRespo125');
+    final data = await _homeRepo.searchPhoto(req: req);
+    print('object  :  girlDressRespo129');
+    girlDressRespo.value = data;
   }
 }
