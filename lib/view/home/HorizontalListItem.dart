@@ -43,7 +43,7 @@ class HorizontalListItem extends StatelessWidget {
             onClick: (String title) =>
                 Get.toNamed(RoutersConst.list, arguments: [title])),
         Obx(() {
-          ApiResponse<SearchPhotoRespo?> respo = getRespo();
+          var respo = getRespo();
           if (respo.status == ApiStatus.COMPLETED) {
             // currentPage++;
             data = respo.data!.results;
@@ -67,7 +67,10 @@ class HorizontalListItem extends StatelessWidget {
             index: index,
             height: height,
             width: width,
-            onClick: () => Get.toNamed(RoutersConst.detail)));
+            onClick: () {
+              print('Send argu');
+              Get.toNamed(RoutersConst.detail,
+                arguments: [title, data![index]]);}));
   }
 
   Widget getView(
