@@ -27,10 +27,10 @@ class PhotoListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _scrollController.addListener(() {
-      // debugPrint(
-      //     "pixels : ${_scrollController.position
-      //         .pixels}  \n maxScrollExtent : ${_scrollController.position
-      //         .maxScrollExtent}");
+      debugPrint(
+          "pixels : ${_scrollController.position
+              .pixels}  \n maxScrollExtent : ${_scrollController.position
+              .maxScrollExtent}");
       if (_scrollController.position.pixels > 0 &&
           _scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent) {
@@ -41,28 +41,7 @@ class PhotoListItem extends StatelessWidget {
     callApi();
     // return Container();
     return Obx(() {
-      print('object');
-      var respo;
-      if (title == StrConst.TITLE_GIRLS) {
-        respo = _homeController.girlRespo.value;
-      } else if (title == StrConst.TITLE_NATURE) {
-        respo = _homeController.natureRespo.value;
-        // } else if (title == StrConst.TITLE_NATURE) {
-        //   return _homeController.natureRespo.value;
-      } else if (title == StrConst.TITLE_GIRLS_DRESS) {
-        print('object StrConst.TITLE_GIRLS');
-        respo = _homeController.girlDressRespo.value;
-      } else if (title == StrConst.TITLE_CAR) {
-        respo = _homeController.carRespo.value;
-      } else if (title == StrConst.TITLE_LIFESTYLE) {
-        respo = _homeController.lifeStyleRespo.value;
-      } else if (title == StrConst.TITLE_ROBOTIC) {
-        respo = _homeController.robotRespo.value;
-      } else {
-        respo = _homeController.searchPhotoRespo.value;
-      }
-      print('object  respo.status ${respo.status}');
-      // var respo = getRespo();
+      var respo = getRespo();
       if (respo.status == ApiStatus.COMPLETED) {
         currentPage++;
         totalPages = respo.data!.totalPages!;
@@ -75,39 +54,46 @@ class PhotoListItem extends StatelessWidget {
   }
 
   Widget getList() {
-    return Scrollbar(
-      controller: ScrollController(),
-      child: getStaggered(
-          height: 280,
-          crossAxisCount: 2,
-          itemCount: data.length,
-          controller: _scrollController,
-          widget: (context, index) {
-            var item = data[index];
-            return Container(
-              margin: EdgeInsets.all(2),
-              child: ClipRRect(
-                child: Stack(
-                  children: [
-                    getCacheImage(url: item.urls!.small.toString()),
-                    Positioned.fill(
-                        child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                                splashColor: ColorConst.SPLASH_COLOR,
-                                onTap: () =>
-                                    Get.toNamed(RoutersConst.detail)))),
-                  ],
+    return
+      // SingleChildScrollView(
+      //   controller: _scrollController,
+      //   child: Scrollbar(
+      //
+      //   child:
+
+
+        getStaggered(
+            height: 280,
+            crossAxisCount: 2,
+            itemCount: data.length,
+            controller: _scrollController,
+            widget: (context, index) {
+              var item = data[index];
+              return Container(
+                margin: EdgeInsets.all(2),
+                child: ClipRRect(
+                  child: Stack(
+                    children: [
+                      getCacheImage(url: item.urls!.small.toString()),
+                      Positioned.fill(
+                          child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                  splashColor: ColorConst.SPLASH_COLOR,
+                                  onTap: () =>
+                                      Get.toNamed(RoutersConst.detail,
+                                          arguments: [title, item])))),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-            );
-          }),
-    );
+              );
+            });
+    // ),
+      // );
   }
 
   void callApi() {
-
     SearchPicReq req = SearchPicReq(query: title, page: currentPage);
     if (title == StrConst.TITLE_GIRLS) {
       _homeController.girlPic(
