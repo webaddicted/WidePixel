@@ -31,8 +31,7 @@ class LargeSmallItem extends GetView<HomeController> {
         getHeading(
             title: title,
             onClick: (String title) =>
-                Get.toNamed(RoutersConst.list, arguments: [title])
-        ),
+                Get.toNamed(RoutersConst.list, arguments: [title])),
 
         Obx(() {
           var respo = _homeController.img3ComboRespo.value;
@@ -59,7 +58,8 @@ class LargeSmallItem extends GetView<HomeController> {
       child: Row(
         children: [
           InkWell(
-              onTap: () => Get.toNamed(RoutersConst.detail),
+              onTap: () =>
+                  Get.toNamed(RoutersConst.detail, arguments: [title, data[0]]),
               child: getCacheImage(
                   url: data[0].urls!.regular!,
                   height: height,
@@ -68,7 +68,8 @@ class LargeSmallItem extends GetView<HomeController> {
           Column(
             children: [
               InkWell(
-                onTap: () => Get.toNamed(RoutersConst.detail),
+                onTap: () => Get.toNamed(RoutersConst.detail,
+                    arguments: [title, data[1]]),
                 child: getCacheImage(
                     url: data[1].urls!.regular!,
                     height: (height / 2) - 2,
@@ -76,9 +77,10 @@ class LargeSmallItem extends GetView<HomeController> {
               ),
               SizedBox(height: 3),
               InkWell(
-                onTap: () => Get.toNamed(RoutersConst.detail),
+                onTap: () => Get.toNamed(RoutersConst.detail,
+                    arguments: [title, data[2]]),
                 child: getCacheImage(
-                    url: data[3].urls!.regular!,
+                    url: data[2].urls!.regular!,
                     height: (height / 2) - 2,
                     width: width / 2),
               ),
