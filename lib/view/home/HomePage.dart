@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wallpaper/data/bean/search/SearchPicReq.dart';
 import 'package:wallpaper/data/controller/HomeController.dart';
 import 'package:wallpaper/utils/common/WidgetHelper.dart';
 import 'package:wallpaper/utils/constant/ColorConst.dart';
@@ -47,28 +48,28 @@ class HomePage extends GetView<HomeController> {
         SliverList(
             delegate: SliverChildListDelegate(
           [
-            // BannerImgItem(title: StrConst.TITLE_TECHNOLOGY),
-            // SizedBox(height: 10),
-            // CircleCategoryItem(title: StrConst.TITLE_COLOR),
-            // SizedBox(height: 10),
-            // CategoryTagItem(),
-            // SizedBox(height: 10),
-            // LargeSmallItem(title: StrConst.TITLE_POPULAR),
-            // SizedBox(height: 10),
-            // CategoryWithImgItem(),
-            // SizedBox(height: 10),
-            // HorizontalListItem(title: StrConst.TITLE_GIRLS),
-            // SizedBox(height: 10),
-            // GridItem(title: StrConst.TITLE_NATURE),
-            // SizedBox(height: 10),
+            BannerImgItem(title: StrConst.TITLE_TECHNOLOGY),
+            SizedBox(height: 10),
+            CircleCategoryItem(title: StrConst.TITLE_COLOR),
+            SizedBox(height: 10),
+            CategoryTagItem(),
+            SizedBox(height: 10),
+            LargeSmallItem(title: StrConst.TITLE_POPULAR),
+            SizedBox(height: 10),
+            CategoryWithImgItem(),
+            SizedBox(height: 10),
+            HorizontalListItem(title: StrConst.TITLE_GIRLS),
+            SizedBox(height: 10),
+            GridItem(title: StrConst.TITLE_NATURE),
+            SizedBox(height: 10),
             HorizontalListItem(title: StrConst.TITLE_GIRLS_DRESS),
-            // SizedBox(height: 10),
-            // HorizontalListItem(title: StrConst.TITLE_CAR),
-            // SizedBox(height: 10),
-            // CircleCategoryItem(title: StrConst.TITLE_LIFESTYLE),
-            // SizedBox(height: 10),
-            // HorizontalListItem(title: StrConst.TITLE_ROBOTIC),
-            // SizedBox(height: 80),
+            SizedBox(height: 10),
+            HorizontalListItem(title: StrConst.TITLE_CAR),
+            SizedBox(height: 10),
+            CircleCategoryItem(title: StrConst.TITLE_LIFESTYLE),
+            SizedBox(height: 10),
+            HorizontalListItem(title: StrConst.TITLE_ROBOTIC),
+            SizedBox(height: 80),
           ],
         ))
       ],
@@ -112,6 +113,9 @@ class HomePage extends GetView<HomeController> {
               color: ColorConst.BLACK_COLOR,
             ),
             onPressed: () {
+              SearchPicReq req =
+                  SearchPicReq(query: StrConst.TITLE_GIRLS_DRESS, page: 1);
+              _homeController.girlDressPic(req: req);
               // _homeController.photoOrder();
             }),
       ],
