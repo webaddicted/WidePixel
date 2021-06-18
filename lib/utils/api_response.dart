@@ -32,7 +32,7 @@ class ApiResponse<T> {
   }
 
   /// method wraps response in ApiResponse class
-  static ApiResponse<dynamic>? returnResponse<T>(Response response, T apiResponse) {
+  static ApiResponse<dynamic> returnResponse<T>(Response response, T apiResponse) {
     if (response.statusCode == ApiResponseCode.INTERNET_UNAVAILABLE) {
       return ApiResponse.error(
           errCode: response.statusCode,
