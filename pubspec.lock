@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.2"
+  args:
+    dependency: transitive
+    description:
+      name: args
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
   async:
     dependency: transitive
     description:
@@ -22,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  build_cli_annotations:
+    dependency: transitive
+    description:
+      name: build_cli_annotations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   cached_network_image:
     dependency: "direct main"
     description:
@@ -50,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  checked_yaml:
+    dependency: transitive
+    description:
+      name: checked_yaml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   clock:
     dependency: transitive
     description:
@@ -156,6 +177,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.4"
+  git:
+    dependency: transitive
+    description:
+      name: git
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  glob:
+    dependency: transitive
+    description:
+      name: glob
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   http:
     dependency: transitive
     description:
@@ -184,6 +219,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
+  io:
+    dependency: transitive
+    description:
+      name: io
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   js:
     dependency: transitive
     description:
@@ -191,6 +233,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   logging:
     dependency: transitive
     description:
@@ -289,6 +338,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  peanut:
+    dependency: "direct main"
+    description:
+      name: peanut
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   pedantic:
     dependency: transitive
     description:
@@ -331,6 +387,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.1"
+  pub_semver:
+    dependency: transitive
+    description:
+      name: pub_semver
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   rxdart:
     dependency: transitive
     description:
@@ -546,6 +609,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.1"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.0"
 sdks:
   dart: ">=2.13.0 <3.0.0"
   flutter: ">=1.24.0-10.2.pre"
