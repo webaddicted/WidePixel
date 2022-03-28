@@ -1,14 +1,16 @@
-# Wide Pixel
+# widepixelimage
 
-[![GitHub license](https://img.shields.io/badge/License-Apache-blue.svg)](LICENSE)
-![Github Followers](https://img.shields.io/github/followers/webaddicted?label=Follow&style=social)
-![GitHub stars](https://img.shields.io/github/stars/webaddicted/WidePixel?style=social)
-![GitHub forks](https://img.shields.io/github/forks/webaddicted/WidePixel?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/webaddicted/WidePixel?style=social)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e6913bfbf05147418fcf0221022b76e2)](https://www.codacy.com/app/webaddicted/WidePixel)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/c017e5c60b894936b4dcfe055e1c3670)](https://www.codacy.com/app/webaddicted/WidePixel)
+A new Flutter project.
 
-<img src="https://github.com/webaddicted/WidePixel/raw/main/screenshot/getstart.gif"> 
+## Getting Started
 
+This project is a starting point for a Flutter application.
 
+A few resources to get you started if this is your first Flutter project:
 
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
