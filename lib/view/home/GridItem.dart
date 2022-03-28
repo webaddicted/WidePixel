@@ -38,7 +38,7 @@ class GridItem extends StatelessWidget {
             data = respo.data!.results;
             // results.addAll(respo.data!.results!);
             // results = respo.data?.results;
-            return data != null && data!.length > 0 ? getList() : noDataFound();
+            return data != null && data!.isNotEmpty ? getList() : noDataFound();
           } else {
             return apiHandler(response: respo);
           }
