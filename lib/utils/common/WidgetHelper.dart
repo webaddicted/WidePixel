@@ -11,6 +11,7 @@ import 'package:widepixelimage/utils/constant/ColorConst.dart';
 import 'package:widepixelimage/utils/constant/RoutersConst.dart';
 import 'package:widepixelimage/utils/constant/StringConst.dart';
 import 'package:widepixelimage/utils/sp/sp_manager.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 //  {START TEXT VIEW}
 Text getTxt(
@@ -458,34 +459,35 @@ showSnackbar(
 imagePickerDialog({Function? pickImg}) {
   Widget dialog = AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      title: getTxtBlackColor(msg: 'Select Option', fontWeight: FontWeight.bold),
+      title:
+          getTxtBlackColor(msg: 'Select Option', fontWeight: FontWeight.bold),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-      GestureDetector(
-        onTap: () async {
-          Get.back();
-        },
-        child: Container(
-            padding: const EdgeInsets.all(15),
-            child: getTxtBlackColor(msg: 'Take Photo')),
-      ),
-      const Divider(
-        color: Colors.grey,
-        height: 1,
-      ),
-      GestureDetector(
-          onTap: () {
-            Get.back();
-            // getImage(ImageSource.gallery, pickImg);
-            // var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-            // getImageFromCamera(context, 1, selectedfile);
-          },
-          child: Container(
-              padding: const EdgeInsets.all(15),
-              child: getTxtBlackColor(msg: 'Choose From Gallery'))),
+          GestureDetector(
+            onTap: () async {
+              Get.back();
+            },
+            child: Container(
+                padding: const EdgeInsets.all(15),
+                child: getTxtBlackColor(msg: 'Take Photo')),
+          ),
+          const Divider(
+            color: Colors.grey,
+            height: 1,
+          ),
+          GestureDetector(
+              onTap: () {
+                Get.back();
+                // getImage(ImageSource.gallery, pickImg);
+                // var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                // getImageFromCamera(context, 1, selectedfile);
+              },
+              child: Container(
+                  padding: const EdgeInsets.all(15),
+                  child: getTxtBlackColor(msg: 'Choose From Gallery'))),
         ],
       ));
   Get.dialog(dialog);
@@ -743,6 +745,24 @@ Widget getStaggered(
     required Function widget,
     ScrollPhysics? physics,
     ScrollController? controller}) {
+  return GridView.custom(
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    semanticChildCount: 5,
+    gridDelegate: SliverStairedGridDelegate(
+      crossAxisSpacing: 48,
+      mainAxisSpacing: 24,
+      startCrossAxisDirectionReversed: true,
+      pattern: const [
+        StairedGridTile(0.5, 1),
+        StairedGridTile(0.5, 3 / 4),
+        StairedGridTile(1.0, 10 / 4),
+      ],
+    ),
+    childrenDelegate: SliverChildBuilderDelegate(
+      (context, index) => widget(context, index),
+    ),
+  );
   return GridView.builder(
     itemCount: itemCount,
     padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0),

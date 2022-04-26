@@ -13,7 +13,7 @@ dependencies:
   get: ^4.6.1
   dio: ^4.0.4
   #  alice: ^0.2.1
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.0.11
   #  photo_view: ^0.11.1
   #  bubble_tab_indicator: ^0.1.6
   carousel_slider: ^4.0.0

@@ -27,8 +27,8 @@ class _SplashPageState extends State<SplashPage>
     animationController.forward();
     // var userInfo = await SPManager.getCustomerId();
     delay(durationSec: 5, click: () {
-      Get.offAllNamed(RoutersConst.onboard_page);
-      // Get.offAllNamed(RoutersConst.home);
+      // Get.offAllNamed(RoutersConst.onboard_page);
+      Get.offAllNamed(RoutersConst.home);
     });
   }
 

@@ -52,7 +52,7 @@ class HomePageUi extends StatelessWidget {
     );
   }
   Widget toobar() {
-    return SliverAppBar(
+    return AppBar(
       leading: IconButton(
         icon: const Icon(
           Icons.sort,
@@ -92,8 +92,8 @@ class HomePageUi extends StatelessWidget {
       elevation: 50,
       backgroundColor: Colors.transparent,
       // expandedHeight: Get.height - 50,
-      snap: false,
-      pinned: false,
+      // snap: false,
+      // pinned: false,
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           decoration: const BoxDecoration(color: Colors.transparent),

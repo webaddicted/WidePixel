@@ -11,7 +11,6 @@ import 'package:widepixelimage/view/home/BannerImgItem.dart';
 import 'package:widepixelimage/view/home/CategoryTagItem.dart';
 import 'package:widepixelimage/view/home/CategoryWithImgItem.dart';
 import 'package:widepixelimage/view/home/CircleCategoryItem.dart';
-import 'package:widepixelimage/view/home/GridItem.dart';
 import 'package:widepixelimage/view/home/HorizontalListItem.dart';
 import 'package:widepixelimage/view/home/LargeSmallItem.dart';
 import 'package:widepixelimage/view/list/PhotoListItem.dart';
@@ -30,7 +29,8 @@ class HomePage extends GetView<HomeController> {
   ];
   final HomeController _homeController = Get.find();
 
-  final _scrollController = ScrollController();
+   HomePage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +43,47 @@ class HomePage extends GetView<HomeController> {
   }
 
   Widget createUi() {
-    return CustomScrollView(
-      controller: _scrollController,
-      physics: const BouncingScrollPhysics(),
-      slivers: <Widget>[
-        toolbar(),
-        SliverList(
-            delegate: SliverChildListDelegate(
-          [
+    // return CustomScrollView(
+    //   // controller: _scrollController,
+    //   physics: const BouncingScrollPhysics(),
+    //   slivers: <Widget>[
+    //     toolbar(),
+    //     SliverList(
+    //         delegate: SliverChildListDelegate(
+    //           [
+    //         BannerImgItem(title: StringConst.TITLE_TECHNOLOGY),
+    //         const SizedBox(height: 10),
+    //         CircleCategoryItem(title: StringConst.TITLE_COLOR),
+    //         const SizedBox(height: 10),
+    //         CategoryTagItem(),
+    //         const SizedBox(height: 10),
+    //         LargeSmallItem(title: StringConst.TITLE_POPULAR),
+    //         const SizedBox(height: 10),
+    //         CategoryWithImgItem(),
+    //         const SizedBox(height: 10),
+    //         HorizontalListItem(title: StringConst.TITLE_GIRLS),
+    //         const SizedBox(height: 10),
+    //         GridItem(title: StringConst.TITLE_NATURE),
+    //         const SizedBox(height: 10),
+    //         HorizontalListItem(title: StringConst.TITLE_GIRLS_DRESS),
+    //         const SizedBox(height: 10),
+    //         HorizontalListItem(title: StringConst.TITLE_CAR),
+    //         const SizedBox(height: 10),
+    //         CircleCategoryItem(title: StringConst.TITLE_LIFESTYLE),
+    //         const SizedBox(height: 10),
+    //         HorizontalListItem(title: StringConst.TITLE_ROBOTIC),
+    //         const SizedBox(height: 80),
+    //       ],
+    //          
+    //     ))
+    //   ],
+    // );
+
+    return SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            toolbar(),
             BannerImgItem(title: StringConst.TITLE_TECHNOLOGY),
             const SizedBox(height: 10),
             CircleCategoryItem(title: StringConst.TITLE_COLOR),
@@ -63,8 +96,8 @@ class HomePage extends GetView<HomeController> {
             const SizedBox(height: 10),
             HorizontalListItem(title: StringConst.TITLE_GIRLS),
             const SizedBox(height: 10),
-            GridItem(title: StringConst.TITLE_NATURE),
-            const SizedBox(height: 10),
+            // GridItem(title: StringConst.TITLE_NATURE),
+            // const SizedBox(height: 10),
             HorizontalListItem(title: StringConst.TITLE_GIRLS_DRESS),
             const SizedBox(height: 10),
             HorizontalListItem(title: StringConst.TITLE_CAR),
@@ -74,43 +107,11 @@ class HomePage extends GetView<HomeController> {
             HorizontalListItem(title: StringConst.TITLE_ROBOTIC),
             const SizedBox(height: 80),
           ],
-        ))
-      ],
-    );
-
-    /*return SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            // toobar(),
-            BannerImgItem(title: StrConst.TITLE_TECHNOLOGY),
-            SizedBox(height: 10),
-            CircleCategoryItem(title: StrConst.TITLE_COLOR),
-            SizedBox(height: 10),
-            CategoryTagItem(),
-            SizedBox(height: 10),
-            LargeSmallItem(title: StrConst.TITLE_POPULAR),
-            SizedBox(height: 10),
-            CategoryWithImgItem(),
-            SizedBox(height: 10),
-            HorizontalListItem(title: StrConst.TITLE_GIRLS),
-            SizedBox(height: 10),
-            GridItem(title: StrConst.TITLE_NATURE),
-            SizedBox(height: 10),
-            HorizontalListItem(title: StrConst.TITLE_GIRLS_DRESS),
-            SizedBox(height: 10),
-            HorizontalListItem(title: StrConst.TITLE_CAR),
-            SizedBox(height: 10),
-            CircleCategoryItem(title: StrConst.TITLE_LIFESTYLE),
-            SizedBox(height: 10),
-            HorizontalListItem(title: StrConst.TITLE_ROBOTIC),
-            SizedBox(height: 80),
-          ],
-        ));*/
+        ));
   }
 
   Widget toolbar() {
-    return SliverAppBar(
+    return AppBar(
       leading: IconButton(
         icon: const Icon(
           Icons.sort,
@@ -151,15 +152,15 @@ class HomePage extends GetView<HomeController> {
             }),
       ],
       elevation: 50,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       // expandedHeight: Get.height - 50,
-      snap: false,
-      pinned: false,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          decoration: const BoxDecoration(color: Colors.transparent),
-        ),
-      ),
+      // snap: false,
+      // pinned: false,
+      // flexibleSpace: FlexibleSpaceBar(
+      //   background: Container(
+      //     decoration: const BoxDecoration(color: Colors.transparent),
+      //   ),
+      // ),
     );
   }
 
@@ -201,6 +202,7 @@ class HomePage extends GetView<HomeController> {
       type: BottomNavigationBarType.fixed,
       onTap: (index) {
         _selectedIndex.value = index;
+        showSnackbar(title: "$index", isSuccess: true);
       },
     );
   }
@@ -208,9 +210,7 @@ class HomePage extends GetView<HomeController> {
   Widget showBottomItem() {
     return _selectedIndex.value == 2 || _selectedIndex.value == 4
         ? Container(
-            child: _widgetOptions.elementAt(_selectedIndex.value),
-          )
-        : Container(
+            child: _widgetOptions.elementAt(_selectedIndex.value)) : Container(
             color: ColorConst.WHITE_COLOR,
             padding: const EdgeInsets.all(10),
             child: Column(
@@ -267,7 +267,7 @@ class HomePage extends GetView<HomeController> {
                     ),
                   ],
                 ),
-                // SearchBar('Search for restaurants, Cusines...'),
+                // SearchBar('Search for restaurants, Cussines...'),
                 _widgetOptions.elementAt(_selectedIndex.value),
               ],
             ),

@@ -19,8 +19,8 @@ class BannerImgItem extends  GetView<HomeController> {
 
   List<Results>? data = [];
 
-  BannerImgItem({required this.title});
-  HomeController _homeController = Get.find();
+  BannerImgItem({Key? key, required this.title}) : super(key: key);
+  final HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
