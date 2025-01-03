@@ -416,7 +416,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 70.0,
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             width: double.infinity,
-            child: RaisedButton(
+            child: MaterialButton(
               color: highlighterPink,
               onPressed: () {},
               child: Column(

@@ -331,7 +331,7 @@ Widget raisedRoundAppColorBtn(String txt, Function btnClick) => ButtonTheme(
         child: getTxtWhiteColor(
             msg: 'Add Address', fontSize: 15, fontWeight: FontWeight.bold),
         style: ElevatedButton.styleFrom(
-            primary: ColorConst.APP_COLOR,
+           // primary: ColorConst.APP_COLOR,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20))),
       ),
@@ -349,7 +349,7 @@ Widget raisedRoundColorBtn(String txt, Color color, Function() btnClick) =>
         child: getTxtWhiteColor(
             msg: 'Add Address', fontSize: 15, fontWeight: FontWeight.bold),
         style: ElevatedButton.styleFrom(
-            primary: color,
+          //  primary: color,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20))),
       ),

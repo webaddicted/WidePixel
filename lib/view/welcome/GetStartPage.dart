@@ -24,7 +24,7 @@ class GetStartPage extends GetView<WelcomeController> {
         Container(
           height: 40,
           margin: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
-          child: FlatButton(
+          child: MaterialButton(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0),
             ),

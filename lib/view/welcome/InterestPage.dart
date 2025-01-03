@@ -100,7 +100,7 @@ class InterestedPage extends GetView<WelcomeController> {
           onTap: () => Get.toNamed(RoutersConst.home),
           child: Container(
             margin: const EdgeInsets.all(8),
-            child: FlatButton(
+            child: MaterialButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(27.0),
               ),

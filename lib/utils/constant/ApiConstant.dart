@@ -5,7 +5,7 @@ class ApiConstant {
   static final String NoInternetConnection = "No Internet Connection";
   static String DEMO_IMG =
       'https://avatars0.githubusercontent.com/u/38448422?s=460&u=21b610183d275611a9bc0f730653d931b39f2d0b&v=4';
-  static final int TIMEOUT = 1500000;
+  static final int TIMEOUT = 5;
   static const PAGE_SIZE = 20;
 
   static String known = 'Known';

@@ -150,7 +150,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       child: SizedBox(
         height: 45.0,
         width: 140.0,
-        child: FlatButton(
+        child: MaterialButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(27.0),
           ),

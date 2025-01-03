@@ -15,8 +15,8 @@ class ApiBaseHelper {
   ApiBaseHelper() {
     // alice = Alice(showNotification: true);
     var options = BaseOptions(
-        receiveTimeout: ApiConstant.TIMEOUT,
-        connectTimeout: ApiConstant.TIMEOUT);
+        receiveTimeout: Duration(seconds: ApiConstant.TIMEOUT),
+        connectTimeout: Duration(seconds: ApiConstant.TIMEOUT));
     options.baseUrl = ApiConstant.BASE_URL;
     var map = <String, dynamic>{};
     map['Authorization'] = 'Client-ID ${ApiConstant.UnsplashApiKey}';
